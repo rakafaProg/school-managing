@@ -1,0 +1,23 @@
+{
+  "name": "theschool",
+  "version": "1.0.0",
+  "description": "School Managing PHP program",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakafaProg/theschool.git"
+  },
+  "author": "Rakkefet Ifrach",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rakafaProg/theschool/issues"
+  },
+  "homepage": "https://github.com/rakafaProg/theschool#readme",
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "jquery": "^3.3.1"
+  }
+}
