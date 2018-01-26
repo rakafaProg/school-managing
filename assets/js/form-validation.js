@@ -1,27 +1,26 @@
 
-jQuery(document).ready(function() {
 
 
-    /*
-        Form validation
-    */
-    $('.login-form input[type="text"], .login-form input[type="password"], .login-form textarea').on('focus', function() {
-    	$(this).removeClass('input-error');
-    });
+document.querySelector('.login-form .btn').addEventListener ('click', function(e){
 
-    $('.login-form').on('submit', function(e) {
+  // get all the required inputs in the form
+  let requiredInputs = document.querySelectorAll('.login-form input:required');
+  let err = "";
 
-    	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
-    		if( $(this).val() == "" ) {
-    			e.preventDefault();
-    			$(this).addClass('input-error');
-    		}
-    		else {
-    			$(this).removeClass('input-error');
-    		}
-    	});
+  requiredInputs.forEach(function(inputElement){
 
-    });
+    if (!inputElement.value){
+      inputElement.classList.add('input-error');
+      e.preventDefault();
+      err = "Please fill all the required fields to log-in";
+    }
+    else {
+      inputElement.classList.remove('input-error');
+    }
 
+  });
+
+  // Display / Undisplay error massage for form validations
+  document.getElementById('errorMsg').innerHTML = err;
 
 });
