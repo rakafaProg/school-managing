@@ -12,6 +12,7 @@ A PHP app to mange students and courses in school
 - PHP
     - MVC Structure
     - Routing
+    - Singleton
     - OOP
     - Password encryption
     - File upload
