@@ -13,8 +13,36 @@
         $this->setPassword($params['password']);
       }
 
+      function getAsArray() {
+        return [
+          'name' => $this->name,
+          'role' => $this->role,
+          'phone' => $this->phone,
+          'email' => $this->email,
+          'id' => $this->id,
+          'password' => ''
+        ];
+      }
+
       function getRole() {
         return $this->role;
+      }
+
+      function getRoleName() {
+        switch ($this->role) {
+          case 1:
+            return 'Owner';
+            break;
+          case 2:
+            return 'Manager';
+            break;
+          case 3:
+            return 'Sales';
+            break;
+          default:
+            return 'Guest';
+            break;
+        }
       }
 
       function setRole ($role) {
