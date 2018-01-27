@@ -1,3 +1,8 @@
+<?php session_start();
+
+  include_once '../debug.php';
+?>
+
 <!DOCTYPE html>
 <html>
   <head>

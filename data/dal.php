@@ -1,4 +1,9 @@
 <?php
+  require_once '../debug.php';
+
+  // create a connection to the database
+  // and create-read-update-delete data
+  // all using this class
 
   class DAL {
       private $conn;
@@ -13,7 +18,7 @@
               $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           }
           catch (PDOException $e) {
-              echo $e->getMessage();
+              debug($e->getMessage());
               return $e->getMessage();
           }
       }
@@ -25,7 +30,7 @@
 
       // singleton
       public static function getInstance($params) {
-          echo 'get instance<br />';
+          debug('get instance');
           if(!isset(self::$instance))
               self::$instance = new DAL($params);
           return self::$instance;
@@ -78,9 +83,7 @@
   //
   // *** testing connection ***
   // foreach ($data->fetch('select * from roles') as $role) {
-  //   echo "<pre>";
-  //   var_dump($role);
-  //   echo "</pre>";
+  //   debug($role);
   // }
 
 ?>

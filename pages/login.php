@@ -1,4 +1,7 @@
-<?php include_once 'header.php'; ?>
+<?php
+include_once 'header.php';
+  include_once '../controllers/login-control.php';
+?>
 
 <main>
 
@@ -27,7 +30,7 @@
                             <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" required>
                         </div>
                         <div id='errorMsg' class="error-massage">
-
+                            <?php if(isset($errorMsg)){echo $errorMsg;} ?>
                         </div>
                         <button type="submit" class="btn btn-primary">Sign in!</button>
                     </form>
