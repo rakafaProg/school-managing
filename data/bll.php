@@ -14,7 +14,7 @@
         }
 
         public static function getAdminsByRole ($role) {
-          $whereSql = " WHERE `role`=".$role;
+          $whereSql = " WHERE `role`>=".$role;
           return self::getAdminWhere($whereSql);
         }
 
@@ -28,7 +28,7 @@
 
           $adminsArray = [];
           foreach (DAL::getInstance($GLOBALS['dbDetails'])->fetch($sql) as $admin) {
-            $adminsArray[] = new Administrator($admin);
+            $adminsArray[$admin['id']] = new Administrator($admin);
           }
 
           return $adminsArray;

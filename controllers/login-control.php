@@ -7,7 +7,7 @@
         }
 
     if (isset($_POST['form-password']) && isset($_POST['form-username'])) {
-      $user = BLL::getAdmin($_POST['form-username'], MD5($_POST['form-password']));
+      $user = array_values(BLL::getAdmin($_POST['form-username'], MD5($_POST['form-password'])));
       if (isset($user[0]) && !empty($user[0])){
         $_SESSION['user'] = $user[0]->getAsArray();
         header('Location: school.php');
