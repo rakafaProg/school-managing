@@ -5,12 +5,14 @@
         protected $phone;
         protected $email;
         private $id;
+        protected $image;
 
         public function __construct($params) {
           $this->setName($params['name']);
           $this->setPhone($params['phone']);
           $this->setEmail($params['email']);
           $this->id = $params['id'];
+          $this->setImage($params['image']);
         }
 
         public function getId() {
@@ -39,6 +41,14 @@
 
         public function setEmail ($email) {
             $this->email = $email;
+        }
+
+        function getImage() {
+            return $this->image;
+        }
+
+        function setImage($image) {
+            $this->image = $image;
         }
     }
 

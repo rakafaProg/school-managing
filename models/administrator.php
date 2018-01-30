@@ -19,7 +19,8 @@
           'role' => $this->role,
           'phone' => $this->phone,
           'email' => $this->email,
-          'id' => $this->id,
+          'id' => $this->getId(),
+          'image' => $this->image,
           'password' => ''
         ];
       }

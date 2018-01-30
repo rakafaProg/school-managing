@@ -30,7 +30,7 @@
 
       // singleton
       public static function getInstance($params) {
-          debug('get instance');
+          //debug('get instance');
           if(!isset(self::$instance))
               self::$instance = new DAL($params);
           return self::$instance;

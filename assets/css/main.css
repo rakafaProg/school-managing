@@ -1,5 +1,10 @@
 body {
   background-color: #d8ffd8;
+  width: 100%;
+}
+
+*:not(i) {
+  font-family: 'Acme' !important;
 }
 
 
@@ -21,4 +26,9 @@ form div {
 input.error {
   border: 1px solid #ff0000 !important;
   background-color: #ffcccc !important;
+}
+
+main {
+  width: 95%;
+  margin: 40px auto;
 }

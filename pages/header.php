@@ -1,7 +1,8 @@
 <?php session_start();
 
   include_once '../debug.php';
-  include_once '../models/administrator.php';
+  include_once '../data/bll.php';
+  //include_once '../models/administrator.php';
 
   if (isset($_SESSION['user'])) {
     $user = new Administrator($_SESSION['user']);
@@ -12,6 +13,7 @@
       'phone' => '',
       'email' => '',
       'id' => '',
+      'image' => '',
       'password' => ''
     ]);
 
@@ -29,13 +31,17 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="icon" href="../assets/images/logo.png" />
 
     <!-- semantic ui -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/components/icon.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/components/icon.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Acme' rel='stylesheet'>
 
 
     <link rel="stylesheet" href="../assets/css/main.css" />
@@ -57,20 +63,24 @@
 
         <a class="item ui header olive <?= viewToRole (3, $user) ?>" href="#">Courses</a>
         <a class="item ui header olive <?= viewToRole (3, $user) ?>" href="#">Students</a>
-        <a class="item ui header olive <?= viewToRole (2, $user) ?>" href="#">Administration</a>
+        <a class="item ui header olive <?= viewToRole (2, $user) ?>" href="admin.php">Administration</a>
 
-        <div class="right menu <?= viewToRole (4, $user) ?>">
-          <a class="item ui header olive" href="logout.php">Log-Out</a>
-          <div class="item ui header green">
-            <span><?= $user->getName() ?> - <?= $user->getRoleName() ?></span>
-          </div>
-          <div class="item ui">
-            <img class="ui circular image profile-img" src="https://www.fg-a.com/smileys/monster-smiley.jpg" />
-          </div>
+        <div class="right menu"> </div>
+
+
+        <a class="item ui header olive <?= viewToRole (4, $user) ?>" href="logout.php">Log-Out</a>
+        <div class="item ui header green <?= viewToRole (4, $user) ?>">
+          <span><?= $user->getName() ?> - <?= $user->getRoleName() ?></span>
         </div>
+        <div class="item ui <?= viewToRole (4, $user) ?>">
+          <img class="ui circular image profile-img" src="<?= $user->getImage() ?>" />
+        </div>
+
 
       </div>
 
     </header>
 
     <p></p>
+
+    <main>

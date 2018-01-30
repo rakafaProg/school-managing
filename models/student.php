@@ -9,16 +9,9 @@
       function __construct($params) {
         parent::__construct($params);
 
-        $this->setImage($params['image']);
       }
 
-      function getImage() {
-          return $this->image;
-      }
 
-      function setImage($image) {
-          $this->image = $image;
-      }
 
     }
 
