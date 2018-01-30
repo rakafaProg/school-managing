@@ -30,93 +30,47 @@
   <head>
     <meta charset="utf-8">
     <link rel="icon" href="../assets/images/logo.png" />
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css">
-    <!-- css for the specific page:  -->
-    <link rel="stylesheet" href="../assets/css/<?= str_replace('.php', '', basename($_SERVER['PHP_SELF'])) ?>.css">
+
+    <!-- semantic ui -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/components/icon.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.js"></script>
+
+
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <script>function debug(msg) { console.log(msg); }</script>
+
     <title>The School</title>
   </head>
-  <body>
 
-
-
+  <body class="ui header blue">
 
     <header>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top ">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <span class="logo pull-left">
-            <img src="../assets/images/logo.png" title="Learning is Fun" />
-          </span>
-          <a class="navbar-brand pull-left" href="school.php">The-School</a>
-        </div>
-        <ul class="nav navbar-nav <?= viewToRole (3, $user) ?>">
-          <li><a href="school.php?courses">Courses</a></li>
-          <li><a href="school.php?students">Students</a></li>
-          <li class="<?= viewToRole (2, $user) ?>"><a href="school.php?admin">Administration</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right <?= viewToRole (3, $user) ?>">
-          <li><a><?= $user->getName() ?> - <?= $user->getRoleName() ?></a></li>
-          <li>
-            <a href="logout.php">Log-out</a>
-          </li>
-          <li>
-            <img class="user-img" src="https://www.fg-a.com/smileys/monster-smiley.jpg" title="Your Image" />
-          </li>
-        </ul>
-      </div>
-    </nav>
+      <div class="ui stackable inverted menu">
 
-      <style>
-      .logo {
-        padding: 10px 10px 0 10px;
-        }
+        <a class="item ui header green" href="school.php">
+          <i class="student icon"></i>
+          The School
+        </a>
 
-        .user-img {
-          height: 50px;
-          width: 60px;
-        }
+        <a class="item ui header olive <?= viewToRole (3, $user) ?>" href="#">Courses</a>
+        <a class="item ui header olive <?= viewToRole (3, $user) ?>" href="#">Students</a>
+        <a class="item ui header olive <?= viewToRole (2, $user) ?>" href="#">Administration</a>
 
-
-
-      </style>
-
-      <!-- empty navbar to save space when the window's size changes -->
-      <nav class="navbar navbar-inverse invisible">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <span class="logo pull-left">
-              <img src="../assets/images/logo.png" title="Learning is Fun" />
-            </span>
-            <a class="navbar-brand pull-left" href="school.php">The-School</a>
+        <div class="right menu <?= viewToRole (4, $user) ?>">
+          <a class="item ui header olive" href="logout.php">Log-Out</a>
+          <div class="item ui header green">
+            <span><?= $user->getName() ?> - <?= $user->getRoleName() ?></span>
           </div>
-          <ul class="nav navbar-nav">
-            <li><a href="#">Page 1</a></li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
-            <li><a href="#">Page 4</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a>User Name - Role</a></li>
-            <li>
-              <a href="logout.php">Log-out</a>
-            </li>
-            <li>
-              <img class="user-img" src="https://www.fg-a.com/smileys/monster-smiley.jpg" title="Your Image" />
-            </li>
-          </ul>
+          <div class="item ui">
+            <img class="ui circular image profile-img" src="https://www.fg-a.com/smileys/monster-smiley.jpg" />
+          </div>
         </div>
-      </nav>
 
-
-
+      </div>
 
     </header>
 
-    <script>
-      function debug(msg) {
-        console.log(msg);
-      }
-    </script>
+    <p></p>

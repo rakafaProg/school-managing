@@ -1,0 +1,24 @@
+body {
+  background-color: #d8ffd8;
+}
+
+
+.profile-img {
+  height: 50px;
+  border-width:5px;
+  border-style:groove;
+}
+
+
+.invisible {
+  display: none !important;
+}
+
+form div {
+  margin-top: 20px !important;
+}
+
+input.error {
+  border: 1px solid #ff0000 !important;
+  background-color: #ffcccc !important;
+}
