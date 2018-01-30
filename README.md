@@ -7,7 +7,7 @@ A PHP app to mange students and courses in school
 
 - HTML + CSS
     - HTML5 Structure
-    - Bootstrap design
+    - Semantic UI design
 - JavaScript
 - PHP
     - MVC Structure
