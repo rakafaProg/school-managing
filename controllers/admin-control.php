@@ -40,6 +40,14 @@
     $roleVisible = true;
   }
 
+  if (isset($_POST['form-image'])) {
+    debug('iamg is set');
+    
+    include_once '../data/image-upload.php';
+    debug ('done with image');
+    die;
+  }
+
 
 
  ?>

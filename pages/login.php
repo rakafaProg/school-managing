@@ -43,7 +43,8 @@
 
 
         </form>
-
+</div>
+</div>
 
 <style type="text/css">
    .column {

@@ -78,7 +78,7 @@ require_once '../controllers/admin-control.php';
       </div>
 
 
-      <form class="ui large form <?php if(!$formVisible) echo 'invisible';?>" action="admin.php" method="GET">
+      <form class="ui large form <?php if(!$formVisible) echo 'invisible';?>" action="admin.php" method="POST" enctype="multipart/form-data">
 
         <div class="ui left icon fluid input">
           <input type="text" placeholder="Name" name="form-username" value="<?php if(isset($editedAdmin)) echo $editedAdmin->getName(); ?>" required>
@@ -115,16 +115,14 @@ require_once '../controllers/admin-control.php';
               <input class="invisible" type="file" id="file" accept="image/*" name="form-image">
             </div>
             <div class="ten wide column">
-              <img class="ui fluid image" src="<?php if(isset($editedAdmin)) echo $editedAdmin->getImage(); ?>"  />
+              <img class="ui fluid image" src="<?php if(isset($editedAdmin)) echo '../images-uploading/useres-profile/' . $editedAdmin->getImage(); ?>"  />
             </div>
           </div>
 
 
-          <div>
-            <button class="ui button fluid big green">
-              Save
-              <i class="checkmark icon"></i>
-            </button>
+          <div class="ui  icon fluid input center">
+            <input type='submit' name="submit" class="ui button fluid big green center" value="Save">
+            <i class="checkmark icon"></i>
           </div>
 
 

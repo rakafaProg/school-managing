@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2018 at 12:06 PM
+-- Generation Time: Feb 01, 2018 at 03:55 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -34,15 +34,18 @@ CREATE TABLE `administrators` (
   `role` int(11) NOT NULL,
   `phone` varchar(14) COLLATE utf8_bin NOT NULL,
   `email` varchar(30) COLLATE utf8_bin NOT NULL,
-  `password` varchar(250) COLLATE utf8_bin NOT NULL
+  `password` varchar(250) COLLATE utf8_bin NOT NULL,
+  `image` varchar(250) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `administrators`
 --
 
-INSERT INTO `administrators` (`id`, `name`, `role`, `phone`, `email`, `password`) VALUES
-(1, 'Rakkefet', 1, '1-800-800-800', 'rakkafa.prog@gmail.com', 'e19d5cd5af0378da05f63f891c7467af');
+INSERT INTO `administrators` (`id`, `name`, `role`, `phone`, `email`, `password`, `image`) VALUES
+(1, 'Rakkefet', 1, '1-800-800-800', 'rakkafa.prog@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'https://img00.deviantart.net/642f/i/2015/328/4/8/sad_anime_girl_by_hanakokyu-d9hubhf.png'),
+(2, 'Rambo', 3, '050-555-5050', 'zotus2@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'http://images6.fanpop.com/image/answers/3515000/3515300_1398810749931.07res_360_300.jpg'),
+(3, 'Michal', 2, '*2800', 'michal@school.com', 'e19d5cd5af0378da05f63f891c7467af', 'http://1.bp.blogspot.com/-VCa-UI6opfs/Tmh1l3t1U8I/AAAAAAAAAN8/ChAwE5vQN1g/s1600/hinagiku+red+face.jpg');
 
 -- --------------------------------------------------------
 
