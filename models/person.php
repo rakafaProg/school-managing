@@ -6,6 +6,7 @@
         protected $email;
         private $id;
         protected $image;
+        protected static $imagesUrl = '../images-uploading/users-profile/';
 
         public function __construct($params) {
           $this->setName($params['name']);
@@ -49,6 +50,10 @@
 
         function setImage($image) {
             $this->image = $image;
+        }
+
+        function getImageURL () {
+          return self::$imagesUrl . $this->image;
         }
     }
 

@@ -8,6 +8,31 @@
 
     class BLL {
 
+        public static function createAdmin($admin) {
+          debug($admin);
+          $sql =
+            'INSERT INTO
+            `administrators`
+            (`id`, `name`, `role`, `phone`, `email`, `password`, `image`)
+            VALUES
+            (NULL,
+              "'.$admin->getName().'",
+              '.$admin->getRole().',
+              "'.$admin->getPhone().'",
+              "'.$admin->getEmail().'",
+              "'.$admin->getPassword().'",
+              "'.$admin->getImage().'"
+            )';
+          debug($sql);
+
+          $result = DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+          debug('============  Result: =====================');
+          debug($result);
+
+          debug('============ End Result: ==================');
+
+        }
+
         public static function getAllAdmins () {
           $whereSql = "";
           return self::getAdminWhere($whereSql);

@@ -73,7 +73,7 @@
           <span><?= $user->getName() ?> - <?= $user->getRoleName() ?></span>
         </div>
         <div class="item ui <?= viewToRole (4, $user) ?>">
-          <img class="ui circular image profile-img" src="<?= $user->getImage() ?>" />
+          <img class="ui circular image profile-img" src="<?= $user->getImageURL() ?>" />
         </div>
 
 

@@ -1,8 +1,11 @@
 <?php require_once 'header.php';
 
+include_once '../images-uploading/image-upload.php'; 
+
 require_once '../controllers/admin-control.php';
 
 ?>
+
 
 
 <div class="ui two column stackable grid">
@@ -38,7 +41,7 @@ require_once '../controllers/admin-control.php';
             <div class="card">
 
               <div class="content">
-                <img class="ui circular image profile-img right floated" src="<?= $admin->getImage() ?>">
+                <img class="ui circular image profile-img right floated" src="<?= $admin->getImageURL() ?>">
                 <div class="header">
                   <?= $admin->getName() ?>
                 </div>
@@ -80,6 +83,9 @@ require_once '../controllers/admin-control.php';
 
       <form class="ui large form <?php if(!$formVisible) echo 'invisible';?>" action="admin.php" method="POST" enctype="multipart/form-data">
 
+        <input name="admin-id" class="invisible" type="text" id='adminId' value="<?php if(isset($editedAdmin)) echo $editedAdmin->getId(); else echo '-1';?>" />
+
+
         <div class="ui left icon fluid input">
           <input type="text" placeholder="Name" name="form-username" value="<?php if(isset($editedAdmin)) echo $editedAdmin->getName(); ?>" required>
           <i class="user icon"></i>
@@ -91,9 +97,23 @@ require_once '../controllers/admin-control.php';
         </div>
 
         <div class="ui left icon fluid input">
-          <input type="text" placeholder="E-mail address" name="form-email" value="<?php if(isset($editedAdmin)) echo $editedAdmin->getEmail(); ?>" required>
+          <input type="text" placeholder="E-mail address" id="formEmail" name="form-email" value="<?php if(isset($editedAdmin)) echo $editedAdmin->getEmail(); ?>" required>
           <i class="mail icon"></i>
         </div>
+
+        <div class="<?php if(isset($editedAdmin) && $user->getId() != $editedAdmin->getId() ) echo 'invisible'; ?>">
+          <div class="ui left icon fluid input">
+            <input type="password" placeholder="Password" id="formPassword" name="form-password" >
+            <i class="lock icon"></i>
+          </div>
+
+          <div class="ui left icon fluid input">
+            <input type="password" placeholder="Repeat Password" id="formRepeatPassword" name="form-repeat-password" >
+            <i class="lock icon"></i>
+          </div>
+        </div>
+
+
 
 
         <div class="ui left icon fluid input <?php if(!$roleVisible) echo 'invisible';?>">
@@ -112,10 +132,11 @@ require_once '../controllers/admin-control.php';
                 Load Profile Image...
                 <i class="upload icon"></i>
               </label>
-              <input class="invisible" type="file" id="file" accept="image/*" name="form-image">
+              <input class="invisible" type="file" id="file" accept="image/*" name="fileToUpload">
             </div>
             <div class="ten wide column">
-              <img class="ui fluid image" src="<?php if(isset($editedAdmin)) echo '../images-uploading/useres-profile/' . $editedAdmin->getImage(); ?>"  />
+              <img class="ui fluid image choosen-image" src="<?php if(isset($editedAdmin)) echo $editedAdmin->getImageURL(); ?>"  />
+              <input name="file-name" class="invisible" type="text" id='fileName' value="<?php if(isset($editedAdmin)) echo $editedAdmin->getImage(); ?>" />
             </div>
           </div>
 
@@ -124,6 +145,7 @@ require_once '../controllers/admin-control.php';
             <input type='submit' name="submit" class="ui button fluid big green center" value="Save">
             <i class="checkmark icon"></i>
           </div>
+
 
 
 
@@ -146,5 +168,22 @@ require_once '../controllers/admin-control.php';
   }
 
 </style>
+
+<script>
+
+$(function() {
+     $("input:file").change(function (){
+       debug($("#fileName").val());
+       var fileName = $(this).val().split('/').pop().split('\\').pop();
+       var fileExtention = fileName.split('.').pop();
+       debug(fileExtention);
+       $("#fileName").val(
+         $("#formEmail").val().replace(/[^a-zA-Z0-9]/g,'_') + "." + fileExtention
+       );
+
+       debug($("#fileName").val());
+
+     });
+  });
 
 </script>

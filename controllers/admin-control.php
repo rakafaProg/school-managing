@@ -40,12 +40,51 @@
     $roleVisible = true;
   }
 
-  if (isset($_POST['form-image'])) {
-    debug('iamg is set');
-    
-    include_once '../data/image-upload.php';
-    debug ('done with image');
-    die;
+  if (isset($_POST['submit'])) {
+      saveAdmin($_POST);
+  } else {
+    debug('not set');
+    debug($_POST);
+  }
+
+
+
+  function saveAdmin ($params) {
+    debug('set');
+    debug($_POST);
+    if (pExist($params['admin-id'])) {
+      uploadImage();
+
+      if($params['admin-id'] == -1){
+        debug('create new');
+        if (
+            pExist($params['admin-id'])
+         && pExist($params['form-username'])
+         && pExist($params['form-phone'])
+         && pExist($params['form-email'])
+         && pExist($params['form-role'])
+         && pExist($params['file-name'])
+         && pExist($params['form-password'])
+         && pExist($params['form-repeat-password'])
+         && $params['form-repeat-password'] == pExist($params['form-password'])
+         ) {
+          $tempAdmin = new Administrator([
+            'name' => $params['form-username'],
+            'role' => $params['form-role'],
+            'phone' => $params['form-phone'],
+            'email' => $params['form-email'],
+            'id' => NULL,
+            'image' => $params['file-name'],
+            'password' => md5($params['form-password'])]);
+            BLL::createAdmin($tempAdmin);
+        }
+      }
+
+    }
+  }
+
+  function pExist($param) {
+    return isset($param) && !empty($param);
   }
 
 
