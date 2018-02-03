@@ -55,7 +55,8 @@
               return [
                   'recordId' => $lastId,
                   'insertResult' => $result,
-                  'errorMassage' => 'success'
+                  'errorMassage' => 'success',
+                  'rowsEffected' => $result->rowCount()
               ];
           }
           catch(PDOException $e) {
@@ -63,7 +64,8 @@
               'recordId' => -1,
               'insertResult' => false,
               'errorMassage' => $e->getMessage(),
-              'errorCode' => $e->getCode()
+              'errorCode' => $e->getCode(),
+              'rowsEffected' => 0
               ];
           }
       }

@@ -9,7 +9,7 @@
     class BLL {
 
         public static function createAdmin($admin) {
-          debug($admin);
+
           $sql =
             'INSERT INTO
             `administrators`
@@ -23,14 +23,11 @@
               "'.$admin->getPassword().'",
               "'.$admin->getImage().'"
             )';
-          debug($sql);
+
 
           $result = DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
-          debug('============  Result: =====================');
-          debug($result);
 
-          debug('============ End Result: ==================');
-
+          return $result['insertResult'];
         }
 
         public static function getAllAdmins () {
@@ -48,6 +45,11 @@
           return self::getAdminWhere($whereSql);
         }
 
+        public static function deleteAdminById($id) {
+          $sql = "DELETE FROM `administrators` WHERE `id`=".$id;
+          return DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+        }
+
         private static function getAdminWhere ($whereSql) {
           $sql = 'SELECT * FROM `administrators`'.$whereSql;
 
@@ -57,6 +59,17 @@
           }
 
           return $adminsArray;
+        }
+
+        public static function updateAdmin($id, $params) {
+            $sql = 'UPDATE `administrators` SET `id`='.$id;
+            foreach ($params as $key => $value) {
+              $sql .= ', `'.$key.'`="'.$value.'"';
+            }
+            $sql .= ' WHERE `id`='.$id;
+
+            return DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+            
         }
     }
 

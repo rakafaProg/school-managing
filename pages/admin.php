@@ -1,6 +1,6 @@
 <?php require_once 'header.php';
 
-include_once '../images-uploading/image-upload.php'; 
+include_once '../images-uploading/image-upload.php';
 
 require_once '../controllers/admin-control.php';
 
@@ -20,7 +20,7 @@ require_once '../controllers/admin-control.php';
           </div>
         </div>
         <div class="five wide column">
-          <a href="admin.php?edit=-1">
+          <a href="admin.php?edit=-1#editingArea">
             <i class="add user green big icon" title="create new administrator"></i>
 
           </a>
@@ -71,7 +71,7 @@ require_once '../controllers/admin-control.php';
     </div>
   </div>
 
-  <div class="ten wide column">
+  <div class="ten wide column" id="editingArea">
     <div class="ui segment blue">
       <div class="ui green header">
         Add or Edit Administrator
@@ -135,8 +135,8 @@ require_once '../controllers/admin-control.php';
               <input class="invisible" type="file" id="file" accept="image/*" name="fileToUpload">
             </div>
             <div class="ten wide column">
-              <img class="ui fluid image choosen-image" src="<?php if(isset($editedAdmin)) echo $editedAdmin->getImageURL(); ?>"  />
-              <input name="file-name" class="invisible" type="text" id='fileName' value="<?php if(isset($editedAdmin)) echo $editedAdmin->getImage(); ?>" />
+              <img class="ui fluid image choosen-image" src="<?php if(isset($editedAdmin)) echo $editedAdmin->getImageURL(); else echo '../images-uploading/users-profile/default.png'; ?>"  />
+              <input name="file-name" class="invisible" type="text" id='fileName' value="<?php if(isset($editedAdmin)) echo $editedAdmin->getImage(); else echo 'default.png'; ?>" />
             </div>
           </div>
 
@@ -155,6 +155,30 @@ require_once '../controllers/admin-control.php';
 
 
 </div>
+
+
+<div class="ui small modal transition aproove">
+  <h1 class="ui header red">
+      Please confirm this action
+  </h1>
+  <div class="content">
+    <p class="ui header blue">Are you sure that you want to delete this user?</p>
+  </div>
+  <div class="actions">
+    <a class="ui positive button" href="<?= 'hello' ?>">
+      <i class="checkmark icon"></i>
+      Yes
+    </a>
+    <a class="ui negative button" href="admin.php">
+      <i class="checkmark icon"></i>
+      No
+    </a>
+  </div>
+
+</div>
+
+
+
 
 
 <style>
