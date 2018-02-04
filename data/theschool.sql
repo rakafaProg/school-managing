@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2018 at 03:55 PM
+-- Generation Time: Feb 04, 2018 at 07:14 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -43,9 +43,11 @@ CREATE TABLE `administrators` (
 --
 
 INSERT INTO `administrators` (`id`, `name`, `role`, `phone`, `email`, `password`, `image`) VALUES
-(1, 'Rakkefet', 1, '1-800-800-800', 'rakkafa.prog@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'https://img00.deviantart.net/642f/i/2015/328/4/8/sad_anime_girl_by_hanakokyu-d9hubhf.png'),
-(2, 'Rambo', 3, '050-555-5050', 'zotus2@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'http://images6.fanpop.com/image/answers/3515000/3515300_1398810749931.07res_360_300.jpg'),
-(3, 'Michal', 2, '*2800', 'michal@school.com', 'e19d5cd5af0378da05f63f891c7467af', 'http://1.bp.blogspot.com/-VCa-UI6opfs/Tmh1l3t1U8I/AAAAAAAAAN8/ChAwE5vQN1g/s1600/hinagiku+red+face.jpg');
+(1, 'Rakkefet', 1, '050-50-50-50', 'rakkafa.prog@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'rakkafa_prog_gmail_com.jpg'),
+(2, 'Rambo', 2, '055-555-5555', 'zotus2@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'zotus2_gmail_com.jpg'),
+(3, 'Michal', 2, '*2800', 'michal@school.com', 'e19d5cd5af0378da05f63f891c7467af', 'michal_school_com.jpg'),
+(16, 'Death The Kid', 3, '42-42-564', 'death@the.kido', 'e19d5cd5af0378da05f63f891c7467af', 'death_the_kido.png'),
+(21, 'Black Star', 2, '111-111-1111', 'black.star@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'black_star_gmail_com.png');
 
 -- --------------------------------------------------------
 
@@ -59,6 +61,14 @@ CREATE TABLE `courses` (
   `description` varchar(250) COLLATE utf8_bin NOT NULL,
   `image` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `name`, `description`, `image`) VALUES
+(1, 'English', 'Learn English from the best teachers ever.', 'default.jpg'),
+(2, 'Ninja', 'Learn how to hide your prsence', 'ninja.jpg');
 
 -- --------------------------------------------------------
 
@@ -89,10 +99,19 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
   `name` varchar(50) COLLATE utf8_bin NOT NULL,
-  `phone` text COLLATE utf8_bin NOT NULL,
+  `phone` varchar(25) COLLATE utf8_bin NOT NULL,
   `email` varchar(25) COLLATE utf8_bin NOT NULL,
   `image` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`id`, `name`, `phone`, `email`, `image`) VALUES
+(1, 'Sakura', '0055500055', 'sakura@gmail.com', 'sakura.png'),
+(2, 'Naruto Uzumaki', '111000222', 'naruto@gmail.com', 'default.png'),
+(3, 'Kakashi', '1545875', 'kakashi@gmail.com', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -106,6 +125,17 @@ CREATE TABLE `students-courses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
+-- Dumping data for table `students-courses`
+--
+
+INSERT INTO `students-courses` (`course-id`, `student-id`) VALUES
+(1, 1),
+(1, 3),
+(2, 1),
+(2, 2),
+(2, 3);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -114,6 +144,7 @@ CREATE TABLE `students-courses` (
 --
 ALTER TABLE `administrators`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `managing-roles` (`role`);
 
 --
@@ -149,13 +180,13 @@ ALTER TABLE `students-courses`
 -- AUTO_INCREMENT for table `administrators`
 --
 ALTER TABLE `administrators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -167,7 +198,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

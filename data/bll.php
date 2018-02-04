@@ -1,6 +1,8 @@
 <?php
     include_once 'dal.php';
     include_once '../models/administrator.php';
+    include_once '../models/student.php';
+    include_once '../models/course.php';
 
     /*
       This class converts MySQL data into the project models (classes)
@@ -69,7 +71,47 @@
             $sql .= ' WHERE `id`='.$id;
 
             return DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
-            
+
+        }
+
+
+        public static function getAllStudents () {
+          $sql =
+          'SELECT `id`,`name`,`phone`,`email`,`image`,
+          COUNT(`students-courses`.`course-id`) AS course_cnt
+          FROM `students`
+          JOIN `students-courses`
+          ON `students-courses`.`student-id`=`students`.`id`
+          GROUP BY `id`';
+
+          $studentsArray = [];
+
+          foreach (DAL::getInstance($GLOBALS['dbDetails'])->fetch($sql) as $student) {
+            $studentsArray[$student['id']] = new Student($student);
+          }
+
+          return $studentsArray;
+
+        }
+
+
+        public static function getAllCourses () {
+          $sql =
+          'SELECT `id`, `name`, `description`, `image`,
+          COUNT(`students-courses`.`course-id`) AS student_cnt
+          FROM `courses`
+          JOIN `students-courses`
+          ON `students-courses`.`course-id`=`courses`.`id`
+          GROUP BY `id`';
+
+          $coursesArray = [];
+
+          foreach (DAL::getInstance($GLOBALS['dbDetails'])->fetch($sql) as $course) {
+            $coursesArray[$course['id']] = new Course($course);
+          }
+
+          return $coursesArray;
+
         }
     }
 

@@ -61,8 +61,8 @@
           The School
         </a>
 
-        <a class="item ui header olive <?= viewToRole (3, $user) ?>" href="#">Courses</a>
-        <a class="item ui header olive <?= viewToRole (3, $user) ?>" href="#">Students</a>
+        <a class="item ui header olive invisible <?= viewToRole (3, $user) ?>" href="school.php?courses">Courses</a>
+        <a class="item ui header olive invisible <?= viewToRole (3, $user) ?>" href="school.php?students">Students</a>
         <a class="item ui header olive <?= viewToRole (2, $user) ?>" href="admin.php">Administration</a>
 
         <div class="right menu"> </div>
