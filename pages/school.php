@@ -1,5 +1,7 @@
 <?php include_once 'header.php';
       include_once '../controllers/main-controller.php';
+      include_once '../templates/templatesHandler.php';
+      $card = new Card();
 ?>
 
 
@@ -15,8 +17,8 @@
           </div>
         </div>
         <div class="five wide column">
-          <a href="school.php?edit=-1#editingArea">
-            <i class="add  green big icon" title="create new student"></i>
+          <a href="school.php?course=-1#editingArea">
+            <i class="add  green big icon" title="create new course"></i>
           </a>
         </div>
       </div>
@@ -26,32 +28,12 @@
 
       <div class="ui cards">
 
-        <?php foreach ($courses as $course) { ?>
+        <?php
 
-          <div class="card">
-
-            <div class="content">
-              <img class="ui circular image profile-img right floated" src="<?= $course->getImageURL() ?>">
-              <div class="header">
-                <?= $course->getName() ?>
-              </div>
-              <div class="meta">
-                <?= $course->getStudentsCount() ?> students in the course
-              </div>
-              <div class="description">
-                <?= $course->getDescription() ?>
-              </div>
-            </div>
-
-            <div class="extra content">
-              <div class="ui two buttons">
-                <a class="ui basic green button" href="school.php?viewcourse=<?= $course->getId() ?>#editingArea">View Details</a>
-              </div>
-            </div>
-
-          </div>
-
-        <?php } ?>
+        foreach ($courses as $course) {
+           $card->getCourseCardView($course);
+         }
+         ?>
 
       </div>
 
@@ -73,55 +55,20 @@
           </div>
         </div>
         <div class="five wide column">
-          <a href="school.php?edit=-1#editingArea">
+          <a href="school.php?student=-1#editingArea">
             <i class="add user green big icon" title="create new student"></i>
           </a>
         </div>
       </div>
-<div class="ui divider">
-  
-</div>
+      <div class="ui divider"> </div>
 
         <div class="ui cards">
 
-          <?php foreach ($students as $student) { ?>
-
-            <div class="card">
-
-              <div class="content">
-                <img class="ui circular image profile-img right floated" src="<?= $student->getImageURL() ?>">
-                <div class="header">
-                  <?= $student->getName() ?>
-                </div>
-                <div class="meta">
-                  Listed to <?= $student->getCourseAmount() ?> courses
-                </div>
-                <div class="description">
-                  Phone Number: <a href="tel:<?= $student->getPhone() ?>"><?= $student->getPhone() ?></a>
-                </div>
-                <div class="description">
-                  Eamil Adress: <a href="mailto:<?= $student->getEmail() ?>"><?= $student->getEmail() ?></a>
-                </div>
-              </div>
-
-              <div class="extra content">
-                <div class="ui two buttons">
-                  <a class="ui basic green button" href="school.php?viewstudent=<?= $student->getId() ?>#editingArea">View Details</a>
-                </div>
-              </div>
-
-            </div>
-
-          <?php } ?>
+          <?php foreach ($students as $student) {
+            $card->getStudentCardView($student);
+           } ?>
 
         </div>
-
-
-
-
-
-
-
 
 
 
@@ -131,38 +78,20 @@
 
 
   </div>
-  <div class="eight wide column">
-    <div class="ui segment blue" id="editingArea">
-
-      <div class="ui grid">
-        <div class="eight wide column center">
-          <div class="ui circular segment">
-            <h2 class="ui header">
-              Students:
-              <div class="sub header">
-                <?= count($students) ?> in total
-              </div>
-            </h2>
-
-          </div>
-        </div>
-        <div class="eight wide column center" >
-          <div class="ui inverted circular segment">
-            <h2 class="ui inverted header">
-              Courses:
-              <div class="sub header"><?= count($courses) ?> in total</div>
-            </h2>
-
-          </div>
-        </div>
-      </div>
+  <div class="eight wide column"  id="editingArea">
+    <div class="ui segment blue">
 
 
+      <?php
+      echo '<div class="ui green huge header center">
+        There are '.count($students). ' students,
+      </div>';
 
+      echo '<div class="ui green huge header center">
+        and '.count($courses). ' courses in the school.
+      </div>';
 
-
-
-
+      ?>
 
 
 

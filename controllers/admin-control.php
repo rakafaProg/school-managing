@@ -9,24 +9,12 @@
 
 
   $formVisible = false;
-  $roleVisible = false;
 
   $adminsList = [];
 
-  $adminsList = BLL::getAdminsByRole($user->getRole());
+  $adminsList = BLL::getAllAdmins();
 
-  function editDeleteBtnsForAdmins($admin, $user) {
-    $htmlResult = '<div class="ui two buttons">';
-    $htmlResult .= '<a class="ui basic green button" href="admin.php?edit='.$admin->getId().'#editingArea">Edit</a>';
 
-    if (  $admin->getRole() != 1 &&
-      $user->getId() != $admin->getId() ) {
-      $htmlResult .= '<a class="ui basic red button delete" href="admin.php?delete='.$admin->getId().'">Delete</a>';
-    }
-
-    $htmlResult .= '</div>';
-    return $htmlResult;
-  }
 
   if (isset($_GET['edit']) && isset($adminsList[$_GET['edit']])) {
     $editedAdmin = $adminsList[$_GET['edit']];
@@ -35,16 +23,10 @@
 
   if (isset($_GET['edit']) && $_GET['edit'] == -1) {
     $formVisible = true;
-    $roleVisible = true;
-  }
-
-  if ($user->getRole() == 1) {
-    $roleVisible = true;
   }
 
   if (isset($_POST['submit'])) {
       saveAdmin($_POST);
-
   }
 
 
@@ -78,67 +60,68 @@
 
 
   function saveAdmin ($params) {
-    if (isset($params['admin-id'])) {
+    if (isset($params['id'])) {
 
 
-      if($params['admin-id'] == -1){
+      if($params['id'] == -1){
         if (
-            isset($params['admin-id']) && !empty($params['adminid'])
-         && isset($params['form-username']) && !empty($params['form-username'])
-         && isset($params['form-phone']) && !empty($params['form-phone'])
-         && isset($params['form-email']) && !empty($params['form-email'])
-         && isset($params['form-role']) && !empty($params['form-role'])
+            isset($params['id']) && !empty($params['id'])
+         && isset($params['name']) && !empty($params['name'])
+         && isset($params['phone']) && !empty($params['phone'])
+         && isset($params['email']) && !empty($params['email'])
+         && isset($params['role']) && !empty($params['role'])
          && isset($params['file-name']) && !empty($params['file-name'])
-         && isset($params['form-password']) && !empty($params['form-password'])
-         && isset($params['form-repeat-password']) && !empty($params['form-repeat-password'])
-         && $params['form-repeat-password'] == $params['form-password']
+         && isset($params['password']) && !empty($params['password'])
+         && isset($params['repeat-password']) && !empty($params['repeat-password'])
+         && $params['repeat-password'] == $params['password']
          ) {
           $tempAdmin = new Administrator([
-            'name' => $params['form-username'],
-            'role' => $params['form-role'],
-            'phone' => $params['form-phone'],
-            'email' => $params['form-email'],
+            'name' => $params['name'],
+            'role' => $params['role'],
+            'phone' => $params['phone'],
+            'email' => $params['email'],
             'id' => NULL,
             'image' => $params['file-name'],
-            'password' => md5($params['form-password'])]);
+            'password' => md5($params['password'])]);
             $res = BLL::createAdmin($tempAdmin);
             if ($res == false) {
               $messageColor = 'red';
               $messageHead = 'Action aborted';
-              $messageMain = 'Sorry, we could not create the user '.$params['form-username'] .'.<br /><br /> Please use a differnt email address and then try again. <br /><br />If you keep seeing this massage - please contact the site manager. ';
+              $messageMain = 'Sorry, we could not create the user '.$params['name'] .'.<br /><br /> Please use a differnt email address and then try again. <br /><br />If you keep seeing this massage - please contact the site manager. ';
 
             } else {
-              uploadImage();
+
+
               $messageColor = 'green';
               $messageHead = 'Success';
-              $messageMain = 'The '.$tempAdmin->getRoleName().' '. $params['form-username']. ' was created successfully!';
-
+              $messageMain = 'The '.$tempAdmin->getRoleName().' '. $params['name']. ' was created successfully!';
+              $messageMain.=uploadImage();
             }
               $messageURL = 'admin.php';
             include __DIR__.'/messaging.php';
         }
-      } elseif ($params['admin-id'] != 1 || $GLOBALS['user']->getId() == 1) {
+      } elseif ($params['id'] != 1 || $GLOBALS['user']->getId() == 1) {
         $mssgHead = "Updating....";
         $mssg = "";
         $updateder = [];
         // update password
         if (
-            isset($params['form-password']) && !empty($params['form-password'])
-          && isset($params['form-repeat-password']) && !empty($params['form-repeat-password'])
-          && $params['form-repeat-password'] == $params['form-password']
-            && $params['admin-id'] == $GLOBALS['user']->getId()) {
-              $updateder['password'] = $params['form-password'];
+            isset($params['password']) && !empty($params['password'])
+          && isset($params['repeat-password']) && !empty($params['repeat-password'])
+          && $params['repeat-password'] == $params['password']
+            && $params['id'] == $GLOBALS['user']->getId()) {
+              $updateder['password'] = md5($params['password']);
               $mssg .= '<br /> Password was updated.  <br />';
 
 
           }
           if (
-            isset($params['form-role']) && !empty($params['form-role'])
-          && ($params['form-role'] == 2 || $params['form-role'] == 3)
+            isset($params['role']) && !empty($params['role'])
+          && ($params['role'] == 2 || $params['role'] == 3)
           && $GLOBALS['user']->getRole() == 1
-          && $GLOBALS['user']->getId() != $params['admin-id']
+          && $GLOBALS['user']->getId() != $params['id']
             ){
-              $updateder['role'] = $params['form-role'];
+              $updateder['role'] = $params['role'];
             $mssg .= '<br /> Role was updated. <br />';
 
 
@@ -146,36 +129,44 @@
 
           if (
             $GLOBALS['user']->getRole() < 3
-            && isset($params['form-username']) && !empty($params['form-username'])
-            && isset($params['form-phone']) && !empty($params['form-phone'])
-            && isset($params['form-email']) && !empty($params['form-email'])
+            && isset($params['name']) && !empty($params['name'])
+            && isset($params['phone']) && !empty($params['phone'])
+            && isset($params['email']) && !empty($params['email'])
             && isset($params['file-name']) && !empty($params['file-name'])
 
           ) {
 
-            $updateder['name'] = $params['form-username'];
-            $updateder['phone'] = $params['form-phone'];
-            $updateder['email'] = $params['form-email'];
+            $updateder['name'] = $params['name'];
+            $updateder['phone'] = $params['phone'];
+            $updateder['email'] = $params['email'];
             $updateder['image'] = $params['file-name'];
 
             $mssg .= '<br /> Basic user details where updated. <br />';
 
           }
 
-          $result = BLL::updateAdmin($params['admin-id'], $updateder);
+          $result = BLL::updateAdmin($params['id'], $updateder);
 
           if ($result['rowsEffected'] == 1){
-            uploadImage();
+
             $messageColor = 'green';
             $messageHead = 'Updating status';
             $messageMain = 'Admin details where updated successfully.';
+            if(!empty($_FILES["fileToUpload"]["name"]))
+              $messageMain.=uploadImage();
 
           } else {
+            if(!empty($_FILES["fileToUpload"]["name"])){
+              $messageColor = 'green';
+              $messageHead = 'Updating status';
+              $messageMain = 'Admin details where updated successfully.';
+              $messageMain.=uploadImage();
+            } else {
             $messageColor = 'red';
             $messageHead = 'Update failed ';
             $messageMain = 'No data was updated. <br /> Please make sure that you have comitted changes on the user details, and that you have the permition to do so. ';
+            }
           }
-
           $messageURL = 'admin.php';
           include __DIR__.'/messaging.php';
 

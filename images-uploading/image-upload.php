@@ -11,42 +11,45 @@ function uploadImage() {
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
   // Check if image file is a actual image or fake image
+
   $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
   if($check !== false) {
       $uploadOk = 1;
   } else {
-      $errorMassage = "File is not an image.";
+      $errorMassage .= "<br /><br />Cannot read this file as an image. <br /><br />Please make sure your image is less than 2 Mb.";
       $uploadOk = 0;
   }
 
   // Check file size
-  if ($_FILES["fileToUpload"]["size"] > 2000000) {
-      $errorMassage .= "Sorry, your file is too large.";
+  if ($_FILES["fileToUpload"]["size"] > 2097152) {
+      $errorMassage .= "<br /><br />Sorry, your file is too large.";
+
       $uploadOk = 0;
   }
+
+
 
   // Allow certain file formats
   if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
   && $imageFileType != "gif" ) {
-      $errorMassage .= "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      $errorMassage .= "<br /><br />Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadOk = 0;
   }
 
 
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
-      $errorMassage .= "Sorry, your file was not uploaded.";
+      $errorMassage .= "<br /><br />Sorry, your file was not uploaded.";
   // if everything is ok, try to upload file
   } else {
       if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-          debug ("The image was successfully uploaded");
+          $errorMassage .='<br /><br / />The image was successfully uploaded'; // ("The image was successfully uploaded");
       } else {
-          $errorMassage .= "Sorry, there was an error uploading your file.";
+          $errorMassage .= "<br /><br />Sorry, there was an error uploading your file.";
       }
   }
-
   debug($errorMassage);
-
+  return $errorMassage;
 
 }
 
@@ -58,26 +61,7 @@ function uploadImage() {
 
  ?>
 
-<script>
 
-function createObjectURL(object) {
-    return (window.URL) ? window.URL.createObjectURL(object) : window.webkitURL.createObjectURL(object);
-}
-
-function revokeObjectURL(url) {
-    return (window.URL) ? window.URL.revokeObjectURL(url) : window.webkitURL.revokeObjectURL(url);
-}
-
-
-  $(function() {
-       $("input:file").change(function (){
-         var src = createObjectURL(this.files[0]);
-         $(".choosen-image").attr('src',src);
-       });
-    });
-
-
-</script>
 
 </body>
 </html>

@@ -36,3 +36,7 @@ main {
 .center {
   text-align: center !important;
 }
+
+#editingArea .segment{
+  min-height: 400px;
+}
