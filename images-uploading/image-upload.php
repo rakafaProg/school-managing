@@ -1,12 +1,12 @@
 <?php
 
-function uploadImage() {
+function uploadImage($imgDir, $imgName) {
 
   $errorMassage = "";
 
   if(isset($_POST["submit"]) && !empty($_FILES["fileToUpload"]["name"])) {
-  $target_dir = __DIR__."/users-profile/";
-  $target_file = $target_dir . $_POST['file-name'];
+  $target_dir = __DIR__."/".$imgDir."/";
+  $target_file = $target_dir . $imgName; // $_POST['file-name'];
   $uploadOk = 1;
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 

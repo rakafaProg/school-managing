@@ -42,7 +42,7 @@
       $params = $this->buildBasicCard ($course);
 
       $params['meta'] = $course->getStudentsCount().' students in this course';
-      $params['description'] =  [$course->getDescription()];
+      $params['description'] =  ['<pre>'.$course->getDescription().'</pre>'];
 
       $params['buttons'][] = [
           'color' => 'green',
@@ -88,6 +88,10 @@
 
 
   }
+
+
+
+
 
   class Form {
     private $templateURL;
@@ -174,6 +178,82 @@
       $params['inputs'][] = $this->createInput('password', 'Repeate Password', 'repeat-password', '', 'lock');
 
       include $this->templateURL;
+    }
+
+
+
+
+    public function createNewStudentForm() {
+
+      // build basic params:
+      $params = [
+        'id' => -1,
+        'header'=> "Create a New Student",
+        'inputs' => [],
+        'imageUrl' => '../images-uploading/students-profile/default.png',
+        'imageName' => 'default.png'
+      ];
+
+      // set basic inputs:
+      $params['inputs'][] = $this->createInput('text', 'Name', 'name', '', 'user');
+      $params['inputs'][] = $this->createInput('email', 'E-mail Address', 'email', '', 'mail');
+      $params['inputs'][] = $this->createInput('text', 'Phone Number', 'phone', '', 'call');
+
+      include $this->templateURL;
+    }
+
+
+
+    public function createNewCourseForm() {
+
+      // build basic params:
+      $params = [
+        'id' => -1,
+        'header'=> "Create a New Course",
+        'inputs' => [$this->createInput('text', 'Name', 'name', '', '')],
+        'textarea' => [
+          'placeholder' => 'Description',
+          'name' => 'description',
+          'value' => ''
+        ],
+        'imageUrl' => '../images-uploading/courses/default.jpg',
+        'imageName' => 'default.png',
+        //'deletable' => true,
+        // 'aditional' => $this->buildCourses([
+        //   ['id'=>1, 'name'=>'Ninja'],
+        //   ['id'=>2, 'name'=>'English'],
+        //   ['id'=>3, 'name'=>'Math'],
+        //   ['id'=>4, 'name'=>'Java'],
+        //   ['id'=>1, 'name'=>'Ninja'],
+        //
+        // ])
+      ];
+
+
+      include $this->templateURL;
+    }
+
+
+    private function buildCourses($coursesList) {
+      $aditional = '<div class="ui header green">Courses: </div>
+        <div class="ui grid">
+
+
+      ';
+
+      foreach ($coursesList as $course) {
+        $aditional .= '
+        <div class="ui checkbox four wide column">
+        <input type="checkbox" name="'.$course['id'].'">
+        <label>'.$course['name'].'</label>
+        </div>
+
+        ';
+      }
+      $aditional .= '</div>';
+
+      return $aditional;
+
     }
 
 

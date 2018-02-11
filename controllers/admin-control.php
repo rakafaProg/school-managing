@@ -1,5 +1,6 @@
 <?php
 
+
   if ($user->getRole() > 2) {
     require '../pages/permition-error.php';
     require '../pages/footer.php';
@@ -12,7 +13,7 @@
 
   $adminsList = [];
 
-  $adminsList = BLL::getAllAdmins();
+  $adminsList = AdminBLL::getAllAdmins();
 
 
 
@@ -33,10 +34,10 @@
   if (isset($_GET['delete']) && !empty($_GET['delete']) ) {
     $messageURL = 'admin.php';
     if (isset($_GET['aprooved'])) {
-    if((BLL::deleteAdminById($_GET['delete']))['rowsEffected'] == 1){
+    if((AdminBLL::deleteAdminById($_GET['delete']))['rowsEffected'] == 1){
       $messageColor = 'green';
       $messageHead = 'Success';
-      $messageMain = 'The user was successfuly created. ';
+      $messageMain = 'The user was successfuly deleted. ';
 
     } else {
       $messageColor = 'red';
@@ -62,7 +63,7 @@
   function saveAdmin ($params) {
     if (isset($params['id'])) {
 
-
+      $imgDir = 'users-profile';
       if($params['id'] == -1){
         if (
             isset($params['id']) && !empty($params['id'])
@@ -75,27 +76,29 @@
          && isset($params['repeat-password']) && !empty($params['repeat-password'])
          && $params['repeat-password'] == $params['password']
          ) {
+           $res = '';
           $tempAdmin = new Administrator([
             'name' => $params['name'],
             'role' => $params['role'],
             'phone' => $params['phone'],
             'email' => $params['email'],
             'id' => NULL,
-            'image' => $params['file-name'],
+            'image' => $res['recordId']. $params['file-name'],
             'password' => md5($params['password'])]);
-            $res = BLL::createAdmin($tempAdmin);
-            if ($res == false) {
+            $res = AdminBLL::createAdmin($tempAdmin);
+            if ($res['insertResult'] == false) {
               $messageColor = 'red';
               $messageHead = 'Action aborted';
               $messageMain = 'Sorry, we could not create the user '.$params['name'] .'.<br /><br /> Please use a differnt email address and then try again. <br /><br />If you keep seeing this massage - please contact the site manager. ';
 
             } else {
-
+              if($params['file-name'] != 'default.png')
+                AdminBLL::updateAdmin($res['recordId'], ['image'=>$res['recordId']. $params['file-name']]);
 
               $messageColor = 'green';
               $messageHead = 'Success';
               $messageMain = 'The '.$tempAdmin->getRoleName().' '. $params['name']. ' was created successfully!';
-              $messageMain.=uploadImage();
+              $messageMain.=uploadImage($imgDir, $res['recordId']. $params['file-name'] );
             }
               $messageURL = 'admin.php';
             include __DIR__.'/messaging.php';
@@ -145,7 +148,7 @@
 
           }
 
-          $result = BLL::updateAdmin($params['id'], $updateder);
+          $result = AdminBLL::updateAdmin($params['id'], $updateder);
 
           if ($result['rowsEffected'] == 1){
 
@@ -153,14 +156,14 @@
             $messageHead = 'Updating status';
             $messageMain = 'Admin details where updated successfully.';
             if(!empty($_FILES["fileToUpload"]["name"]))
-              $messageMain.=uploadImage();
+              $messageMain.=uploadImage($imgDir, $_POST['file-name']);
 
           } else {
             if(!empty($_FILES["fileToUpload"]["name"])){
               $messageColor = 'green';
               $messageHead = 'Updating status';
               $messageMain = 'Admin details where updated successfully.';
-              $messageMain.=uploadImage();
+              $messageMain.=uploadImage($imgDir, $_POST['file-name']);
             } else {
             $messageColor = 'red';
             $messageHead = 'Update failed ';

@@ -1,4 +1,5 @@
 <?php include_once 'header.php';
+      include_once '../data/school_bll.php';
       include_once '../controllers/main-controller.php';
       include_once '../templates/templatesHandler.php';
       $card = new Card();
@@ -83,13 +84,30 @@
 
 
       <?php
-      echo '<div class="ui green huge header center">
-        There are '.count($students). ' students,
-      </div>';
 
-      echo '<div class="ui green huge header center">
-        and '.count($courses). ' courses in the school.
-      </div>';
+      if ($courseFormVisible) {
+        $form = new Form();
+        if (isset($editedAdmin))
+           $form->createAdminEditForm($editedAdmin, $user);
+        else
+          $form->createNewCourseForm();
+
+      } elseif ($studentFormVisible) {
+        $form = new Form();
+        $form->createNewStudentForm();
+      }   else {
+
+        echo '<div class="ui green huge header center">
+          There are '.count($students). ' students,
+        </div>';
+
+        echo '<div class="ui green huge header center">
+          and '.count($courses). ' courses in the school.
+        </div>';
+      }
+
+
+
 
       ?>
 

@@ -77,9 +77,17 @@
       <i class="<?= $input['icon'] ?> icon"></i>
     </div>
 
-  <?php }  ?>
+  <?php }
 
-  <?php
+
+    if (isset($params['textarea'])) {
+      echo '
+      <div class"ui label">'.$params['textarea']['placeholder'].':</div>
+      <div class="ui fluid input">
+        <textarea name="'.$params['textarea']['name'].'" >'.$params['textarea']['value'].'</textarea>
+      </div>';
+    }
+
       if (isset($params['dropdwon'])) {
         echo '<div class="ui left icon fluid input">';
         echo '<select class="ui dropdown" name="'.$params['dropdwon']['name'].'">';
@@ -101,7 +109,7 @@
        <div class="ui two column stackable grid">
         <div class="six wide column">
           <label for="file" class="ui icon  inverted green button">
-            Load Profile Image...
+            Load Image...
             <i class="upload icon"></i>
           </label>
           <input class="invisible" type="file" id="file" accept="image/*" name="fileToUpload">
@@ -112,11 +120,28 @@
         </div>
       </div>
 
+      <div>
+        <?php if(isset($params['aditional']))
+                  echo $params['aditional'];
+        ?>
+      </div>
+
 
       <div class="ui icon fluid input center">
-        <input type='submit' name="submit" class="ui button fluid big green center" value="Save">
+        <input type="submit" name="submit" class="ui button fluid big green center" value="Save">
         <i class="checkmark icon"></i>
       </div>
+
+
+      <?php
+        if (isset($params['deletable'])) {
+          echo '<div class="ui icon fluid input center">
+            <input type="submit" name="delete" class="ui button fluid big red center" value="Delete">
+            <i class="trash icon"></i>
+          </div>';
+        }
+
+       ?>
 
 
 
@@ -172,6 +197,9 @@
          $("#fileName").val(
            $("#form-id").val().replace(/[^a-zA-Z0-9]/g,'_') + "." + fileExtention
          );
+
+         if ($('#form-id').val() == -1)
+            $("#fileName").val("." + fileExtention);
 
          debug($("#fileName").val());
 

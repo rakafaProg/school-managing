@@ -1,8 +1,7 @@
 <?php session_start();
 
   include_once '../debug.php';
-  include_once '../data/bll.php';
-  //include_once '../models/administrator.php';
+  include_once "../data/admin_bll.php";
 
   if (isset($_SESSION['user'])) {
     $user = new Administrator($_SESSION['user']);

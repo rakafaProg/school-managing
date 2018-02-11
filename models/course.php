@@ -13,7 +13,7 @@
           $this->id = $params['id'];
           $this->setImage($params['image']);
           $this->description = $params['description'];
-          $this->stdCount = $params['student_cnt'];
+          $this->stdCount = isset($params['student_cnt']) ? $params['student_cnt'] : 0;
         }
 
         public function getId() {
