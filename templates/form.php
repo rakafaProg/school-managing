@@ -135,7 +135,8 @@
 
       <?php
         if (isset($params['deletable'])) {
-          echo '<div class="ui icon fluid input center">
+          echo 
+          '<div class="ui icon fluid input center">
             <input type="submit" name="delete" class="ui button fluid big red center" value="Delete">
             <i class="trash icon"></i>
           </div>';

@@ -58,6 +58,14 @@
         $this->password = $password;
       }
 
+
+
+      function getImageURL () {
+        return '../images-uploading/users-profile/' . $this->image;
+      }
+
+
+
     }
 
 

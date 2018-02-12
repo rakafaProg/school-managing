@@ -21,8 +21,8 @@
               '.$admin->getRole().',
               "'.$admin->getPhone().'",
               "'.$admin->getEmail().'",
-              "'.$admin->getPassword().'",'.
-              ' ""
+              "'.$admin->getPassword().'",
+              "'.$admin->getImage().'"
              )';
 
 

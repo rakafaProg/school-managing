@@ -47,7 +47,7 @@
 
           $result = DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
 
-          return $result['insertResult'];
+          return $result;
         }
 
         public static function createCourse ($course) {
@@ -65,7 +65,19 @@
 
           $result = DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
 
-          return $result['insertResult'];
+          return $result;
+        }
+
+
+        public static function updateCourse($id, $params) {
+          $sql = 'UPDATE `courses` SET `id`='.$id;
+          foreach ($params as $key => $value) {
+            $sql .= ', `'.$key.'`="'.$value.'"';
+          }
+          $sql .= ' WHERE `id`='.$id;
+
+          return DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+
         }
 
 

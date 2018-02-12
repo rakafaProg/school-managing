@@ -40,3 +40,7 @@ main {
 #editingArea .segment{
   min-height: 400px;
 }
+
+label input.ui.checkbox {
+  margin-right: 10px !important;
+}

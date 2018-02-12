@@ -183,7 +183,7 @@
 
 
 
-    public function createNewStudentForm() {
+    public function createNewStudentForm($coursesList) {
 
       // build basic params:
       $params = [
@@ -191,7 +191,16 @@
         'header'=> "Create a New Student",
         'inputs' => [],
         'imageUrl' => '../images-uploading/students-profile/default.png',
-        'imageName' => 'default.png'
+        'imageName' => 'default.png', 
+        'aditional' => $this->buildCourses($coursesList)
+        // [
+        //     ['id'=>1, 'name'=>'Ninja'],
+        //     ['id'=>2, 'name'=>'English'],
+        //     ['id'=>3, 'name'=>'Math'],
+        //     ['id'=>4, 'name'=>'Java'],
+        //     ['id'=>1, 'name'=>'Ninja'],
+          
+        //   ])
       ];
 
       // set basic inputs:
@@ -216,7 +225,7 @@
           'name' => 'description',
           'value' => ''
         ],
-        'imageUrl' => '../images-uploading/courses/default.jpg',
+        'imageUrl' => '../images-uploading/courses/default.png',
         'imageName' => 'default.png',
         //'deletable' => true,
         // 'aditional' => $this->buildCourses([
@@ -243,9 +252,10 @@
 
       foreach ($coursesList as $course) {
         $aditional .= '
-        <div class="ui checkbox four wide column">
-        <input type="checkbox" name="'.$course['id'].'">
-        <label>'.$course['name'].'</label>
+        
+        <div class="four wide column">
+        
+        <label><input class="ui checkbox" type="checkbox" name="'.$course['id'].'">'.$course['name'].'</label>
         </div>
 
         ';

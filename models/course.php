@@ -6,7 +6,6 @@
         protected $stdCount;
         private $id;
         protected $image;
-        protected static $imagesUrl = '../images-uploading/courses/';
 
         public function __construct($params) {
           $this->setName($params['name']);
@@ -53,7 +52,7 @@
         }
 
         function getImageURL () {
-          return self::$imagesUrl . $this->image;
+            return '../images-uploading/courses/' . $this->image;
         }
     }
 

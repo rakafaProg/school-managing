@@ -34,7 +34,8 @@
   if (isset($_GET['delete']) && !empty($_GET['delete']) ) {
     $messageURL = 'admin.php';
     if (isset($_GET['aprooved'])) {
-    if((AdminBLL::deleteAdminById($_GET['delete']))['rowsEffected'] == 1){
+    $res = AdminBLL::deleteAdminById($_GET['delete']);
+    if($res['rowsEffected'] == 1){
       $messageColor = 'green';
       $messageHead = 'Success';
       $messageMain = 'The user was successfuly deleted. ';
@@ -83,7 +84,7 @@
             'phone' => $params['phone'],
             'email' => $params['email'],
             'id' => NULL,
-            'image' => $res['recordId']. $params['file-name'],
+            'image' => 'default.png',
             'password' => md5($params['password'])]);
             $res = AdminBLL::createAdmin($tempAdmin);
             if ($res['insertResult'] == false) {
@@ -92,7 +93,7 @@
               $messageMain = 'Sorry, we could not create the user '.$params['name'] .'.<br /><br /> Please use a differnt email address and then try again. <br /><br />If you keep seeing this massage - please contact the site manager. ';
 
             } else {
-              if($params['file-name'] != 'default.png')
+              if(!empty($_FILES["fileToUpload"]["name"]))
                 AdminBLL::updateAdmin($res['recordId'], ['image'=>$res['recordId']. $params['file-name']]);
 
               $messageColor = 'green';

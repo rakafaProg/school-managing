@@ -13,18 +13,24 @@
 
     $courseFormVisible = false;
 
-    if (isset($_GET['course']) && isset($_GET['course']) == -1) {
+    if (!empty($_GET['course']) && $_GET['course'] == -1) {
       $courseFormVisible = true;
     }
 
     $studentFormVisible = false;
 
-    if (isset($_GET['student']) && isset($_GET['student']) == -1) {
+    if (!empty($_GET['student']) && $_GET['student'] == -1) {
       $studentFormVisible = true;
+      $coursesList = [];
+      foreach($courses as $c) {
+        $coursesList[] = ['id'=>$c->getId(), 'name'=>$c->getName()];
+      }
     }
 
 
     if (isset($_POST['submit'])) {
+      $res = NULL;
+      $imgDir = 'courses';
       if (isset($_POST['description']) && !empty($_POST['description'])
         && isset($_POST['id']) && !empty($_POST['id'])
         && isset($_POST['name']) && !empty($_POST['name'])
@@ -36,14 +42,38 @@
 
           if($_POST['id'] == -1) {
             $res = SchoolBLL::createCourse($tempCourse);
-            debug('course created');
-            debug($res);
+
+            if ($res['insertResult'] == false) {
+              $messageColor = 'red';
+              $messageHead = 'Action aborted';
+              $messageMain = 'Sorry, we could not create the course '.$_POST['name'] .'.<br /><br /> Please use a differnt name and then try again. <br /><br />If you keep seeing this massage - please contact the site manager. ';
+
+            } else {
+              if(!empty($_FILES["fileToUpload"]["name"]))
+                SchoolBLL::updateCourse($res['recordId'], ['image'=>$res['recordId']. $_POST['file-name']]);
+
+              $messageColor = 'green';
+              $messageHead = 'Success';
+              $messageMain = 'The course '. $_POST['name']. ' was created successfully!';
+              $messageMain.=uploadImage($imgDir, $res['recordId']. $_POST['file-name'] );
+            }
+              $messageURL = 'school.php';
+            include __DIR__.'/messaging.php';
+
           }
           debug($tempCourse);
 
         debug($_POST);
 
-      } elseif (isset($_POST['email']) && !empty($_POST['email'])) {
+      } elseif (
+        isset($_POST['email']) && !empty($_POST['email'])
+        && !empty($_POST['name'])
+        && !empty($_POST['phone'])
+        && !empty($_POST['file-name'])
+        ) {
+
+
+
         debug('student');
         debug($_POST);
       }

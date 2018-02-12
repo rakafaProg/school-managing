@@ -15,6 +15,12 @@
       }
 
 
+      
+      function getImageURL () {
+        return '../images-uploading/students-profile/' . $this->image;
+      }
+
+
     }
 
 

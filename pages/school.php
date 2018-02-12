@@ -1,7 +1,9 @@
 <?php include_once 'header.php';
+      include_once '../images-uploading/image-upload.php';
       include_once '../data/school_bll.php';
       include_once '../controllers/main-controller.php';
       include_once '../templates/templatesHandler.php';
+      
       $card = new Card();
 ?>
 
@@ -94,7 +96,7 @@
 
       } elseif ($studentFormVisible) {
         $form = new Form();
-        $form->createNewStudentForm();
+        $form->createNewStudentForm($coursesList);
       }   else {
 
         echo '<div class="ui green huge header center">
