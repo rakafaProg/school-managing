@@ -4,10 +4,13 @@
 
     class Student extends Person {
       private $coursesAmount;
+    
 
       function __construct($params) {
         parent::__construct($params);
         $this->coursesAmount = isset($params['course_cnt']) ? $params['course_cnt'] : 0;
+
+
       }
 
       public function getCourseAmount() {
@@ -15,7 +18,7 @@
       }
 
 
-      
+
       function getImageURL () {
         return '../images-uploading/students-profile/' . $this->image;
       }

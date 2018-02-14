@@ -86,7 +86,8 @@
 
 
       <?php
-
+      // $coursesList = SchoolBLL::getStudentCourses($_GET['student']);
+      // $editedStd = $students[$_GET['viewstudent']];
       if ($courseFormVisible) {
         $form = new Form();
         if (isset($editedAdmin))
@@ -96,7 +97,10 @@
 
       } elseif ($studentFormVisible) {
         $form = new Form();
-        $form->createNewStudentForm($coursesList);
+        if(!empty($editedStd))
+          $form->editStudentForm($coursesList, $editedStd);
+        else
+          $form->createNewStudentForm($coursesList);
       } elseif($viewStdFlag) {
         $student = $viewdStd;
         include_once '../templates/student-view.php';

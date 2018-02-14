@@ -23,10 +23,14 @@
 
     if (!empty($_GET['student']) && $_GET['student'] == -1) {
       $studentFormVisible = true;
-      $coursesList = [];
-      foreach($courses as $c) {
-        $coursesList[] = ['id'=>$c->getId(), 'name'=>$c->getName()];
-      }
+      $coursesList = $courses;
+    }
+
+    if (!empty($_GET['student']) && !empty($students[$_GET['student']])) {
+
+      $coursesList = SchoolBLL::getStudentCourses($_GET['student']);
+      $editedStd = $students[$_GET['student']];
+      $studentFormVisible = true;
     }
 
     if(!empty($_GET['viewstudent']) && !empty($students[$_GET['viewstudent']])) {

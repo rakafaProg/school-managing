@@ -104,7 +104,7 @@
           $sql =
           'SELECT `id`, `name`, `description`, `image`, `student-id`
           FROM `courses`
-           JOIN `students-courses`
+          LEFT JOIN `students-courses`
           ON `students-courses`.`course-id`=`courses`.`id`
           And `students-courses`.`student-id` = '.$studentId;
 

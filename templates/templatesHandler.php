@@ -191,15 +191,15 @@
         'header'=> "Create a New Student",
         'inputs' => [],
         'imageUrl' => '../images-uploading/students-profile/default.png',
-        'imageName' => 'default.png', 
-        'aditional' => $this->buildCourses($coursesList)
+        'imageName' => 'default.png',
+        'aditional' => $this->buildCourses($coursesList, -1)
         // [
         //     ['id'=>1, 'name'=>'Ninja'],
         //     ['id'=>2, 'name'=>'English'],
         //     ['id'=>3, 'name'=>'Math'],
         //     ['id'=>4, 'name'=>'Java'],
         //     ['id'=>1, 'name'=>'Ninja'],
-          
+
         //   ])
       ];
 
@@ -207,6 +207,27 @@
       $params['inputs'][] = $this->createInput('text', 'Name', 'name', '', 'user');
       $params['inputs'][] = $this->createInput('email', 'E-mail Address', 'email', '', 'mail');
       $params['inputs'][] = $this->createInput('text', 'Phone Number', 'phone', '', 'call');
+
+      include $this->templateURL;
+    }
+
+    public function editStudentForm($coursesList, $student) {
+
+      // build basic params:
+      $params = [
+        'id' => -1,
+        'header'=> "Edit Student",
+        'inputs' => [],
+        'imageUrl' => $student->getImageURL(),
+        'imageName' => $student->getImage(),
+        'aditional' => $this->buildCourses($coursesList, $student->getId()),
+        'deletable' => true
+      ];
+
+      // set basic inputs:
+      $params['inputs'][] = $this->createInput('text', 'Name', 'name', $student->getName(), 'user');
+      $params['inputs'][] = $this->createInput('email', 'E-mail Address', 'email', $student->getEmail(), 'mail');
+      $params['inputs'][] = $this->createInput('text', 'Phone Number', 'phone', $student->getPhone(), 'call');
 
       include $this->templateURL;
     }
@@ -243,7 +264,7 @@
     }
 
 
-    private function buildCourses($coursesList) {
+    private function buildCourses($coursesList, $stdId) {
       $aditional = '<div class="ui header green">Courses: </div>
         <div class="ui grid">
 
@@ -252,15 +273,25 @@
 
       foreach ($coursesList as $course) {
         $aditional .= '
-        
+
         <div class="four wide column">
-        
-        <label><input class="ui checkbox" type="checkbox" name="'.$course['id'].'">'.$course['name'].'</label>
+
+        <label>
+        <input
+        class="ui checkbox"
+        type="checkbox"
+        name="'.$course->getId().'"';
+
+        $aditional .= $course->getStudentId() == $stdId ? 'checked' : '';
+
+        $aditional .= '>'.$course->getName().'</label>
         </div>
 
         ';
       }
       $aditional .= '</div>';
+
+      //debug($coursesList);
 
       return $aditional;
 

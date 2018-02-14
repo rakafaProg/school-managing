@@ -6,6 +6,7 @@
         protected $stdCount;
         private $id;
         protected $image;
+        private $studentId;
 
         public function __construct($params) {
           $this->setName($params['name']);
@@ -13,6 +14,7 @@
           $this->setImage($params['image']);
           $this->description = $params['description'];
           $this->stdCount = isset($params['student_cnt']) ? $params['student_cnt'] : 0;
+          $this->studentId = isset($params['student-id']) ? $params['student-id'] : NULL;
         }
 
         public function getId() {
@@ -53,6 +55,10 @@
 
         function getImageURL () {
             return '../images-uploading/courses/' . $this->image;
+        }
+
+        function getStudentId () {
+          return $this->studentId;
         }
     }
 

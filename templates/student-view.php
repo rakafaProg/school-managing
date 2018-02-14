@@ -4,7 +4,6 @@
 
 ?>
 
-<div class="ui segment blue">
   <div class="ui green header">
     Student Details
 
@@ -49,7 +48,9 @@
    <div class="ui two column stackable grid">
 
      <?php
-        foreach ($viewdStdCrs as $crs) {?>
+        foreach ($viewdStdCrs as $crs) {
+
+          if($crs->getStudentId() == $student->getId()){?>
 
           <div class="column">
             <img class="ui circular image profile-img left floated" src="<?= $crs->getImageURL() ?>" />
@@ -57,7 +58,7 @@
           </div>
 
 
-    <?php      }
+    <?php     } }
 
      ?>
 
@@ -65,7 +66,3 @@
    </div>
 
  </div>
-
-
-
-</div>
