@@ -11,6 +11,8 @@
 
     $courses = SchoolBLL::getAllCourses();
 
+    $viewStdFlag = false;
+
     $courseFormVisible = false;
 
     if (!empty($_GET['course']) && $_GET['course'] == -1) {
@@ -25,6 +27,13 @@
       foreach($courses as $c) {
         $coursesList[] = ['id'=>$c->getId(), 'name'=>$c->getName()];
       }
+    }
+
+    if(!empty($_GET['viewstudent']) && !empty($students[$_GET['viewstudent']])) {
+      //debug('view student');
+      $viewdStdCrs = SchoolBLL::getStudentCourses($_GET['viewstudent']);
+      $viewdStd = $students[$_GET['viewstudent']];
+      $viewStdFlag = true;
     }
 
 

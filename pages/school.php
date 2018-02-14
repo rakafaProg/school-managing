@@ -3,7 +3,7 @@
       include_once '../data/school_bll.php';
       include_once '../controllers/main-controller.php';
       include_once '../templates/templatesHandler.php';
-      
+
       $card = new Card();
 ?>
 
@@ -97,7 +97,12 @@
       } elseif ($studentFormVisible) {
         $form = new Form();
         $form->createNewStudentForm($coursesList);
-      }   else {
+      } elseif($viewStdFlag) {
+        $student = $viewdStd;
+        include_once '../templates/student-view.php';
+        //sdebug ('view student');
+
+      }  else {
 
         echo '<div class="ui green huge header center">
           There are '.count($students). ' students,

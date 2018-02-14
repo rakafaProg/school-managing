@@ -99,6 +99,23 @@
           return $coursesArray;
 
         }
+
+        public static function getStudentCourses($studentId) {
+          $sql =
+          'SELECT `id`, `name`, `description`, `image`, `student-id`
+          FROM `courses`
+           JOIN `students-courses`
+          ON `students-courses`.`course-id`=`courses`.`id`
+          And `students-courses`.`student-id` = '.$studentId;
+
+          $coursesArray = [];
+
+          foreach (DAL::getInstance($GLOBALS['dbDetails'])->fetch($sql) as $course) {
+            $coursesArray[$course['id']] = new Course($course);
+          }
+
+          return $coursesArray;
+        }
     }
 
     // // test get admin
