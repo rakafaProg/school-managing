@@ -107,6 +107,29 @@
               $messageURL = 'school.php';
               include __DIR__.'/messaging.php';
             }
+          } elseif(!empty($students[$_POST['id']])) {
+            $res = SchoolBLL::updateStudent(
+              $_POST['id'], 
+              [
+                'name'=>$_POST['name'],
+                'email'=>$_POST['email'],
+                'phone'=>$_POST['phone']
+              ]
+            );
+
+            if(!empty($_FILES["fileToUpload"]["name"]))
+                SchoolBLL::updateStudent($_POST['id'], ['image'=>$_POST['file-name']]);
+              
+            SchoolBLL::setCoursesToStudent($_POST['id'], $_POST);
+            
+            $messageColor = 'green';
+            $messageHead = 'Success';
+            $messageMain = 'The student '. $params['name']. ' was updated successfully!';
+            $messageMain.=uploadImage($imgDir, $_POST['file-name'] );
+            $messageURL = 'school.php';
+            include __DIR__.'/messaging.php';
+            //debug($res);
+
           }
         
       }
