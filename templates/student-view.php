@@ -39,7 +39,7 @@
 
  </div>
 
- <div class="ui tall stacked segment" style="min-height:0">
+ <div class="ui tall stacked segment" style="min-height:0; max-height: 500px;">
    <div class="ui green header">
      Courses:
    </div>

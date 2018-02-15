@@ -215,7 +215,7 @@
 
       // build basic params:
       $params = [
-        'id' => -1,
+        'id' => $student->getId(),
         'header'=> "Edit Student",
         'inputs' => [],
         'imageUrl' => $student->getImageURL(),
@@ -280,7 +280,7 @@
         <input
         class="ui checkbox"
         type="checkbox"
-        name="'.$course->getId().'"';
+        name="course-'.$course->getId().'"';
 
         $aditional .= $course->getStudentId() == $stdId ? 'checked' : '';
 

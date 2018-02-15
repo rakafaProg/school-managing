@@ -8,6 +8,7 @@ function uploadImage($imgDir, $imgName) {
   $target_dir = __DIR__."/".$imgDir."/";
   $target_file = $target_dir . $imgName; // $_POST['file-name'];
   $uploadOk = 1;
+
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
   // Check if image file is a actual image or fake image
@@ -31,7 +32,9 @@ function uploadImage($imgDir, $imgName) {
 
   // Allow certain file formats
   if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-  && $imageFileType != "gif" ) {
+  && $imageFileType != "gif" 
+  && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
+  && $imageFileType != "GIF" ) {
       $errorMassage .= "<br /><br />Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadOk = 0;
   }

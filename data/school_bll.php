@@ -17,7 +17,7 @@
           'SELECT `id`,`name`,`phone`,`email`,`image`,
           COUNT(`students-courses`.`course-id`) AS course_cnt
           FROM `students`
-          JOIN `students-courses`
+          LEFT JOIN `students-courses`
           ON `students-courses`.`student-id`=`students`.`id`
           GROUP BY `id`';
 
@@ -28,6 +28,28 @@
           }
 
           return $studentsArray;
+
+        }
+
+        public static function setCoursesToStudent($studentId, $params) {
+          $sql =
+          'DELETE FROM `students-courses` WHERE `student-id` = '.$studentId;
+          DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+
+          $sql = 
+          'INSERT INTO `students-courses`
+          (`course-id`, `student-id`) VALUES ';
+
+          foreach ($params as $key => $value) {
+            if (strpos($key, 'course-') !== false) {
+              $key = str_replace('course-', '', $key);
+              $sql .= '('.$key.','.$studentId.'), ';
+            }
+          }
+
+          $sql = substr($sql, 0, -2);
+
+          DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
 
         }
 
@@ -48,6 +70,17 @@
           $result = DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
 
           return $result;
+        }
+
+        public static function updateStudent($id, $params) {
+          $sql = 'UPDATE `students` SET `id`='.$id;
+          foreach ($params as $key => $value) {
+            $sql .= ', `'.$key.'`="'.$value.'"';
+          }
+          $sql .= ' WHERE `id`='.$id;
+
+          return DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+
         }
 
         public static function createCourse ($course) {

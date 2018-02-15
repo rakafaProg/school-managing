@@ -79,16 +79,36 @@
         debug($_POST);
 
       } elseif (
+        
+
         isset($_POST['email']) && !empty($_POST['email'])
         && !empty($_POST['name'])
         && !empty($_POST['phone'])
         && !empty($_POST['file-name'])
         ) {
+          $imgDir = 'students-profile';
+          $_POST['image'] = $_POST['file-name'];
+          if  ($_POST['id'] == -1) {
+            $tempStudent = new Student($_POST);
 
+            // debug($tempStudent);
 
+            $res = SchoolBLL::createStudent($tempStudent);
+            if ($res['recordId'] >= 0){
+              SchoolBLL::setCoursesToStudent($res['recordId'], $_POST);
 
-        debug('student');
-        debug($_POST);
+              if(!empty($_FILES["fileToUpload"]["name"]))
+                SchoolBLL::updateStudent($res['recordId'], ['image'=>$res['recordId']. $_POST['file-name']]);
+
+              $messageColor = 'green';
+              $messageHead = 'Success';
+              $messageMain = 'The student '. $params['name']. ' was created successfully!';
+              $messageMain.=uploadImage($imgDir, $res['recordId']. $_POST['file-name'] );
+              $messageURL = 'school.php';
+              include __DIR__.'/messaging.php';
+            }
+          }
+        
       }
       else {
         debug ('not set');
