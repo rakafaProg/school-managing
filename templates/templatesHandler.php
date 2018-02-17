@@ -42,7 +42,7 @@
       $params = $this->buildBasicCard ($course);
 
       $params['meta'] = $course->getStudentsCount().' students in this course';
-      $params['description'] =  ['<pre>'.$course->getDescription().'</pre>'];
+      $params['description'] =  ['<div class="hidden-textarea"><textarea readonly>'.$course->getDescription().'</textarea></div>'];
 
       $params['buttons'][] = [
           'color' => 'green',

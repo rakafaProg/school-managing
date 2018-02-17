@@ -31,12 +31,29 @@
 
         }
 
+        public static function getCoursesStudents ($courseId) {
+          $sql =
+          'SELECT `id`,`name`,`phone`,`email`,`image`
+          FROM `students`
+          JOIN `students-courses`
+          ON `students-courses`.`student-id`=`students`.`id` AND `students-courses`.`course-id`='.$courseId;
+
+          $studentsArray = [];
+
+          foreach (DAL::getInstance($GLOBALS['dbDetails'])->fetch($sql) as $student) {
+            $studentsArray[$student['id']] = new Student($student);
+          }
+
+          return $studentsArray;
+
+        }
+
         public static function setCoursesToStudent($studentId, $params) {
           $sql =
           'DELETE FROM `students-courses` WHERE `student-id` = '.$studentId;
           DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
 
-          $sql = 
+          $sql =
           'INSERT INTO `students-courses`
           (`course-id`, `student-id`) VALUES ';
 

@@ -13,6 +13,8 @@
 
     $viewStdFlag = false;
 
+    $viewCrsFlag = false;
+
     $courseFormVisible = false;
 
     if (!empty($_GET['course']) && $_GET['course'] == -1) {
@@ -39,6 +41,14 @@
       $viewdStd = $students[$_GET['viewstudent']];
       $viewStdFlag = true;
     }
+
+    if(!empty($_GET['viewcourse']) && !empty($students[$_GET['viewcourse']])) {
+      //debug('view student');
+      $viewdCrsStd = SchoolBLL::getCoursesStudents($_GET['viewcourse']);
+      $viewdCrs = $courses[$_GET['viewcourse']];
+      $viewCrsFlag = true;
+    }
+
 
 
     if (isset($_POST['submit'])) {
@@ -79,7 +89,7 @@
         debug($_POST);
 
       } elseif (
-        
+
 
         isset($_POST['email']) && !empty($_POST['email'])
         && !empty($_POST['name'])
@@ -104,12 +114,12 @@
               $messageHead = 'Success';
               $messageMain = 'The student '. $params['name']. ' was created successfully!';
               $messageMain.=uploadImage($imgDir, $res['recordId']. $_POST['file-name'] );
-              $messageURL = 'school.php';
+              $messageURL = 'school.php?viewstudent='.$res['recordId'].'#editingArea';
               include __DIR__.'/messaging.php';
             }
           } elseif(!empty($students[$_POST['id']])) {
             $res = SchoolBLL::updateStudent(
-              $_POST['id'], 
+              $_POST['id'],
               [
                 'name'=>$_POST['name'],
                 'email'=>$_POST['email'],
@@ -119,19 +129,19 @@
 
             if(!empty($_FILES["fileToUpload"]["name"]))
                 SchoolBLL::updateStudent($_POST['id'], ['image'=>$_POST['file-name']]);
-              
+
             SchoolBLL::setCoursesToStudent($_POST['id'], $_POST);
-            
+
             $messageColor = 'green';
             $messageHead = 'Success';
             $messageMain = 'The student '. $params['name']. ' was updated successfully!';
             $messageMain.=uploadImage($imgDir, $_POST['file-name'] );
-            $messageURL = 'school.php';
+            $messageURL = 'school.php?viewstudent='.$_POST['id'].'#editingArea';
             include __DIR__.'/messaging.php';
             //debug($res);
 
           }
-        
+
       }
       else {
         debug ('not set');

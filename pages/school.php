@@ -106,6 +106,11 @@
         include_once '../templates/student-view.php';
         //sdebug ('view student');
 
+      } elseif($viewCrsFlag) {
+        $course = $viewdCrs;
+        include_once '../templates/course-view.php';
+        //sdebug ('view student');
+
       }  else {
 
         echo '<div class="ui green huge header center">
@@ -128,3 +133,28 @@
   </div>
 
 </div>
+
+
+<script>
+
+var textAreas;
+
+$( document ).ready(function() {
+
+textAreas = $('.hidden-textarea textarea');
+
+setTextAreaHeight() ;
+  });
+
+  $( window ).resize(function() {
+  setTextAreaHeight() ;
+  });
+
+  function setTextAreaHeight() {
+    textAreas.each(function (index, value){
+      $(this).css('height', 0 );
+        $(this).css('height', $(this).prop("scrollHeight") + 'px');
+      });
+  }
+
+</script>
