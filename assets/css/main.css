@@ -44,13 +44,3 @@ main {
 label input.ui.checkbox {
   margin-right: 10px !important;
 }
-
-.hidden-textarea textarea{
-  border: none;
-  padding: 0;
-  resize: none;
-  height: 15px;
-  overflow: hidden;
-  width: 100%;
-
-}

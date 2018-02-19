@@ -13,18 +13,19 @@
     <div class="ui segment blue">
 
 
-      <div class="ui two column grid">
-        <div class="eleven wide column center">
-          <div class="ui green header center">
+          <div class="ui green header">
             Courses
+            <?php if ($user->getRole() < 3) { ?>
+            <a class="ui image  right floated " href="school.php?course=-1#editingArea">
+              <i class="large icons">
+                <i class="student green icon"></i>
+                <i class="corner green add icon"></i>
+              </i>
+            </a>
+            <?php } ?>
           </div>
-        </div>
-        <div class="five wide column">
-          <a href="school.php?course=-1#editingArea">
-            <i class="add  green big icon" title="create new course"></i>
-          </a>
-        </div>
-      </div>
+
+
 <div class="ui divider">
 
 </div>
@@ -51,18 +52,18 @@
 
   <div class="four wide column">
     <div class="ui segment blue">
-      <div class="ui two column grid">
-        <div class="eleven wide column center">
-          <div class="ui green header center">
-            Students
-          </div>
-        </div>
-        <div class="five wide column">
-          <a href="school.php?student=-1#editingArea">
-            <i class="add user green big icon" title="create new student"></i>
-          </a>
-        </div>
+
+
+
+
+      <div class="ui green header">
+        Students
+        <a class="ui image  right floated " href="school.php?student=-1#editingArea">
+          <i class="add user green large icon" title="create new student"></i>
+        </a>
       </div>
+
+
       <div class="ui divider"> </div>
 
         <div class="ui cards">
@@ -133,28 +134,3 @@
   </div>
 
 </div>
-
-
-<script>
-
-var textAreas;
-
-$( document ).ready(function() {
-
-textAreas = $('.hidden-textarea textarea');
-
-setTextAreaHeight() ;
-  });
-
-  $( window ).resize(function() {
-  setTextAreaHeight() ;
-  });
-
-  function setTextAreaHeight() {
-    textAreas.each(function (index, value){
-      $(this).css('height', 0 );
-        $(this).css('height', $(this).prop("scrollHeight") + 'px');
-      });
-  }
-
-</script>

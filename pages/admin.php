@@ -15,21 +15,15 @@ include_once '../templates/templatesHandler.php'
   <div class="six wide column">
     <div class="ui segment blue">
 
-      <div class="ui two column grid">
-        <div class="eleven wide column center">
-          <div class="ui green header center">
-            Administrators
-          </div>
-        </div>
-        <div class="five wide column">
-          <a href="admin.php?edit=-1#editingArea">
-            <i class="add user green big icon" title="create new administrator"></i>
+      <div class="ui green header">
+        Administrators
+        <a class="ui image  right floated " href="admin.php?edit=-1#editingArea">
+          <i class="add user green large icon" title="create new administrator"></i>
 
-          </a>
-
-        </div>
-
+        </a>
       </div>
+
+  
 
 
       <div class="ui divider"></div>

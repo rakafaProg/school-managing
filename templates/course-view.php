@@ -31,8 +31,8 @@
      <div class="ui green header">
        <?= $course->getName() ?> , <?= $course->getStudentsCount() ?> Students
      </div>
-     <div class="hidden-textarea">
-       <textarea readonly><?= $course->getDescription() ?></textarea>
+     <div>
+       <?= nl2br ( $course->getDescription()) ?>
      </div>
    </div>
 
