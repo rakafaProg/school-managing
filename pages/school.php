@@ -91,12 +91,13 @@
       // $editedStd = $students[$_GET['viewstudent']];
       if ($courseFormVisible) {
         $form = new Form();
-        if (isset($editedAdmin))
-           $form->createAdminEditForm($editedAdmin, $user);
+        if (isset($editedCrs))
+           $form->editCourseForm($editedCrs);
         else
           $form->createNewCourseForm();
 
       } elseif ($studentFormVisible) {
+
         $form = new Form();
         if(!empty($editedStd))
           $form->editStudentForm($coursesList, $editedStd);

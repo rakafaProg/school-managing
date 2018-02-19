@@ -40,7 +40,7 @@
 
  <div class="ui tall stacked segment" style="min-height:0; max-height: 500px;">
    <div class="ui green header">
-     Students:
+     <?php  if ($course->getStudentsCount() > 0) echo "Students:"; else  echo "There are no students listed to this course"; ?>
    </div>
    <div class="ui divider"></div>
 

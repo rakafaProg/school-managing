@@ -263,6 +263,34 @@
       include $this->templateURL;
     }
 
+    public function editCourseForm($course) {
+
+      // build basic params:
+      $params = [
+        'id' => $course->getId(),
+        'header'=> "Edit Course Details",
+        'inputs' => [$this->createInput('text', 'Name', 'name', $course->getName(), 'student')],
+        'textarea' => [
+          'placeholder' => 'Description',
+          'name' => 'description',
+          'value' => $course->getDescription()
+        ],
+        'imageUrl' => $course->getImageURL(),
+        'imageName' => $course->getImage()
+      ];
+
+      $params['aditional'] = "<div class='ui divider'></div><div class='ui header green'>";
+      if ($course->getStudentsCount() == 0) {
+        $params['deletable'] = true;
+        $params['aditional'] .= "There are no students in this course</div>";
+      } else {
+        $params['aditional'] .= "There are ".$course->getStudentsCount()." students in this course</div>";
+      }
+
+
+      include $this->templateURL;
+    }
+
 
     private function buildCourses($coursesList, $stdId) {
       $aditional = '<div class="ui header green">Courses: </div>

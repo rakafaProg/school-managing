@@ -20,6 +20,12 @@
     if (!empty($_GET['course']) && $_GET['course'] == -1) {
       $courseFormVisible = true;
     }
+    
+    if (!empty($_GET['course']) && !empty($courses[$_GET['course']])) {
+      
+      $editedCrs = $courses[$_GET['course']];
+      $courseFormVisible = true;
+    }
 
     $studentFormVisible = false;
 
@@ -42,8 +48,8 @@
       $viewStdFlag = true;
     }
 
-    if(!empty($_GET['viewcourse']) && !empty($students[$_GET['viewcourse']])) {
-      //debug('view student');
+    if(!empty($_GET['viewcourse']) && !empty($courses[$_GET['viewcourse']])) {
+
       $viewdCrsStd = SchoolBLL::getCoursesStudents($_GET['viewcourse']);
       $viewdCrs = $courses[$_GET['viewcourse']];
       $viewCrsFlag = true;
@@ -83,10 +89,16 @@
               $messageURL = 'school.php';
             include __DIR__.'/messaging.php';
 
+          } elseif (!empty($courses[$_POST['id']])) {
+            $res = SchoolBLL::updateCourse($_POST['id'], [
+              'name'=>$_POST['name'],
+              'description'=>$_POST['description'],
+              'image' => $_POST['file-name']
+              ]);
+            
+              debug($res);
           }
-          debug($tempCourse);
-
-        debug($_POST);
+          
 
       } elseif (
 
