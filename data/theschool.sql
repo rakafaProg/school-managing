@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2018 at 07:14 PM
+-- Generation Time: Feb 21, 2018 at 07:25 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -43,11 +43,11 @@ CREATE TABLE `administrators` (
 --
 
 INSERT INTO `administrators` (`id`, `name`, `role`, `phone`, `email`, `password`, `image`) VALUES
-(1, 'Rakkefet', 1, '050-50-50-50', 'rakkafa.prog@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'rakkafa_prog_gmail_com.jpg'),
-(2, 'Rambo', 2, '055-555-5555', 'zotus2@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'zotus2_gmail_com.jpg'),
-(3, 'Michal', 2, '*2800', 'michal@school.com', 'e19d5cd5af0378da05f63f891c7467af', 'michal_school_com.jpg'),
-(16, 'Death The Kid', 3, '42-42-564', 'death@the.kido', 'e19d5cd5af0378da05f63f891c7467af', 'death_the_kido.png'),
-(21, 'Black Star', 2, '111-111-1111', 'black.star@gmail.com', 'e19d5cd5af0378da05f63f891c7467af', 'black_star_gmail_com.png');
+(1, 'Shinigami Sama', 1, '42-42-564', 'shinigami@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '1.png'),
+(2, 'Franken Stein Hakase', 2, '72-727-272', 'stein@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '2.png'),
+(3, 'Mary Sensei', 2, '13-13-13-13', 'mary@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '3.png'),
+(4, 'Spirit Albarn (Death Scyt', 3, '00-0000-0000', 'spirito@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '4.jpg'),
+(5, 'Shido Sensei', 3, '123-456-789', 'shido@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '5.png');
 
 -- --------------------------------------------------------
 
@@ -67,8 +67,9 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `name`, `description`, `image`) VALUES
-(1, 'English', 'Learn English from the best teachers ever.', 'default.jpg'),
-(2, 'Ninja', 'Learn how to hide your prsence', 'ninja.jpg');
+(1, 'Swording', 'In this course you will learn how to use real swords. \r\nYou will have to be very carefull, since this is the most dangerus course ever. \r\nPlease be aware.', '1.png'),
+(2, 'Sports', 'You will train on evry type of sport every, \r\nIncludes joging, jumping, soccer, streches and so on...', '2.png'),
+(3, 'Operations', 'Learn how to operate on animals, pepole, yourself, and basicly, everything.', '3.gif');
 
 -- --------------------------------------------------------
 
@@ -109,9 +110,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `name`, `phone`, `email`, `image`) VALUES
-(1, 'Sakura', '0055500055', 'sakura@gmail.com', 'sakura.png'),
-(2, 'Naruto Uzumaki', '111000222', 'naruto@gmail.com', 'default.png'),
-(3, 'Kakashi', '1545875', 'kakashi@gmail.com', 'default.png');
+(1, 'Maka Albran', '42-42-564', 'maka@gmail.com', '1.jpg'),
+(2, 'Death The Kid', '888-8888-88', 'kid@gmail.com', '2.png'),
+(3, 'Black Star', '11-111-111', 'black.star@gmail.com', '3.png');
 
 -- --------------------------------------------------------
 
@@ -123,17 +124,6 @@ CREATE TABLE `students-courses` (
   `course-id` int(11) NOT NULL,
   `student-id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `students-courses`
---
-
-INSERT INTO `students-courses` (`course-id`, `student-id`) VALUES
-(1, 1),
-(1, 3),
-(2, 1),
-(2, 2),
-(2, 3);
 
 --
 -- Indexes for dumped tables
@@ -151,7 +141,8 @@ ALTER TABLE `administrators`
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `roles`
@@ -163,7 +154,8 @@ ALTER TABLE `roles`
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `students-courses`
@@ -180,13 +172,13 @@ ALTER TABLE `students-courses`
 -- AUTO_INCREMENT for table `administrators`
 --
 ALTER TABLE `administrators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `roles`
