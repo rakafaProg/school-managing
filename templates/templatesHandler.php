@@ -193,14 +193,7 @@
         'imageUrl' => '../images-uploading/students-profile/default.png',
         'imageName' => 'default.png',
         'aditional' => $this->buildCourses($coursesList, -1)
-        // [
-        //     ['id'=>1, 'name'=>'Ninja'],
-        //     ['id'=>2, 'name'=>'English'],
-        //     ['id'=>3, 'name'=>'Math'],
-        //     ['id'=>4, 'name'=>'Java'],
-        //     ['id'=>1, 'name'=>'Ninja'],
 
-        //   ])
       ];
 
       // set basic inputs:
@@ -240,7 +233,7 @@
       $params = [
         'id' => -1,
         'header'=> "Create a New Course",
-        'inputs' => [$this->createInput('text', 'Name', 'name', '', '')],
+        'inputs' => [$this->createInput('text', 'Name', 'name', '', 'student')],
         'textarea' => [
           'placeholder' => 'Description',
           'name' => 'description',

@@ -89,7 +89,9 @@
       <?php
       // $coursesList = SchoolBLL::getStudentCourses($_GET['student']);
       // $editedStd = $students[$_GET['viewstudent']];
-      if ($courseFormVisible) {
+      if ($notAlowed)
+        include "permition-error.php";
+      elseif ($courseFormVisible) {
         $form = new Form();
         if (isset($editedCrs))
            $form->editCourseForm($editedCrs);

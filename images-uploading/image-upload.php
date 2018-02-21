@@ -32,7 +32,7 @@ function uploadImage($imgDir, $imgName) {
 
   // Allow certain file formats
   if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-  && $imageFileType != "gif" 
+  && $imageFileType != "gif"
   && $imageFileType != "JPG" && $imageFileType != "PNG" && $imageFileType != "JPEG"
   && $imageFileType != "GIF" ) {
       $errorMassage .= "<br /><br />Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
@@ -46,7 +46,7 @@ function uploadImage($imgDir, $imgName) {
   // if everything is ok, try to upload file
   } else {
       if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-          $errorMassage .='<br /><br / />The image was successfully uploaded'; // ("The image was successfully uploaded");
+          $errorMassage = true;// '<br /><br / />The image was successfully uploaded'; // ("The image was successfully uploaded");
       } else {
           $errorMassage .= "<br /><br />Sorry, there was an error uploading your file.";
       }
