@@ -42,16 +42,16 @@ function uploadImage($imgDir, $imgName) {
 
   // Check if $uploadOk is set to 0 by an error
   if ($uploadOk == 0) {
-      $errorMassage .= "<br /><br />Sorry, your file was not uploaded.";
+
   // if everything is ok, try to upload file
   } else {
       if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-          $errorMassage = true;// '<br /><br / />The image was successfully uploaded'; // ("The image was successfully uploaded");
+          $errorMassage = true;
       } else {
           $errorMassage .= "<br /><br />Sorry, there was an error uploading your file.";
       }
   }
-  debug($errorMassage);
+
   return $errorMassage;
 
 }

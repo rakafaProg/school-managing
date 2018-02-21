@@ -23,7 +23,7 @@ include_once '../templates/templatesHandler.php'
         </a>
       </div>
 
-  
+
 
 
       <div class="ui divider"></div>
@@ -48,7 +48,11 @@ include_once '../templates/templatesHandler.php'
     <div class="ui segment blue">
       <?php
 
-        if ($formVisible) {
+        if ($notAlowed) {
+          include "permition-error.php";
+        }
+
+        elseif ($formVisible) {
           $form = new Form();
           if (isset($editedAdmin))
              $form->createAdminEditForm($editedAdmin, $user);

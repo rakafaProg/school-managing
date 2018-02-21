@@ -127,25 +127,19 @@
       </div>
 
 
-      <div class="ui icon fluid input center">
-        <input type="submit" name="submit" class="ui button fluid big green center" value="Save">
-        <i class="checkmark icon"></i>
-      </div>
+       <div class="ui two buttons">
 
+           <input type="submit" name="submit" class="ui inverted green button" value="Save">
 
-      <?php
-        if (isset($params['deletable'])) {
-          echo 
-          '<div class="ui icon fluid input center">
-            <input type="submit" name="delete" class="ui button fluid big red center" value="Delete">
-            <i class="trash icon"></i>
-          </div>';
-        }
+       <?php
+         if (!empty($params['deletable'])) { ?>
+         <a class="ui inverted red button" href="<?= $params['deletable'] ?>">
+           Delete
+         </a>
 
-       ?>
+       <?php } ?>
 
-
-
+       </div>
 
 
   </form>

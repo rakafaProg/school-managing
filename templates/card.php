@@ -41,7 +41,7 @@
     <div class="extra content">
       <div class="ui two buttons">
         <?php foreach ($params['buttons'] as $btn) { ?>
-            <a class="ui basic <?= $btn['color'] ?> button"
+            <a class="ui inverted <?= $btn['color'] ?> button"
               href="<?= $btn['href'] ?>">
               <?= $btn['text'] ?>
             </a>

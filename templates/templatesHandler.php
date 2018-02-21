@@ -214,7 +214,7 @@
         'imageUrl' => $student->getImageURL(),
         'imageName' => $student->getImage(),
         'aditional' => $this->buildCourses($coursesList, $student->getId()),
-        'deletable' => true
+        'deletable' => 'school.php?delstd='.$student->getId()
       ];
 
       // set basic inputs:
@@ -274,7 +274,7 @@
 
       $params['aditional'] = "<div class='ui divider'></div><div class='ui header green'>";
       if ($course->getStudentsCount() == 0) {
-        $params['deletable'] = true;
+        $params['deletable'] = 'school.php?delcrs='.$course->getId();
         $params['aditional'] .= "There are no students in this course</div>";
       } else {
         $params['aditional'] .= "There are ".$course->getStudentsCount()." students in this course</div>";

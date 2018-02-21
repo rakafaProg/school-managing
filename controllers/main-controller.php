@@ -63,7 +63,7 @@
           $studentFormVisible = true;
           $coursesList = $courses;
 
-        } elseif (!empty($courses[$_GET['student']])) { // Edit existing student
+        } elseif (!empty($students[$_GET['student']])) { // Edit existing student
           $coursesList = SchoolBLL::getStudentCourses($_GET['student']);
           $editedStd = $students[$_GET['student']];
           $studentFormVisible = true;
@@ -80,7 +80,7 @@
         $_POST['image'] = 'default.png';
         $imgName = '';
         $res = false;
-        $mssg = '';
+        $mssg = 'Please make sure to fill all the fields before clicking on save.';
         $link = '';
 
         // ---------- COURSE SUBMIT ----------
@@ -151,7 +151,7 @@
             if ($res['insertResult'] == false) {
               // error
               $mssg = 'Sorry, we could not create the student '.$_POST['name'] .'.
-              <br /><br /> Please use a differnt name and then try again.
+              <br /><br /> Please use a differnt email and then try again.
               <br /><br />If you keep seeing this massage - please contact the site manager. ';
               $res = false;
             } else {
@@ -210,7 +210,64 @@
 
     }  // ---------- END SUBMIT FORM ----------
 
+    // ---------- DELETE STUDENT ----------
+    if (!empty($_GET['delstd'])) {
+      $messageURL = 'school.php';
 
+      if (isset($_GET['aprooved'])) {
+        $res = SchoolBLL::deleteStudent($_GET['delstd']);
+        if($res['rowsEffected'] == 1){
+          $messageColor = 'green';
+          $messageHead = 'Success';
+          $messageMain = 'The student was successfuly deleted. ';
+
+      } else {
+        $messageColor = 'red';
+        $messageHead = 'Action aborted';
+        $messageMain = 'Sorry, we could not delete this student.<br /><br /> Please make sure the student exist, and that you are permitted to do this action. ';
+
+      }}
+      else {
+        $messageColor = 'red';
+        $messageHead = 'Confirm Action';
+        $messageMain = 'Are you sure that you want to delete this student? <br /><br />This action cannot be canceld!';
+        $messageOK = "Yes";
+        $cancelURL = 'school.php';
+        $messageURL = 'school.php?delstd='.$_GET['delstd'].'&aprooved';
+      }
+
+      include __DIR__.'/messaging.php';
+    }
+
+
+    // ---------- DELETE COURSE ----------
+    if (!empty($_GET['delcrs']) && $user->getRole() < 3) {
+      $messageURL = 'school.php';
+
+      if (isset($_GET['aprooved'])) {
+        $res = SchoolBLL::deleteCourse($_GET['delcrs']);
+        if($res['rowsEffected'] == 1){
+          $messageColor = 'green';
+          $messageHead = 'Success';
+          $messageMain = 'The course was successfuly deleted. ';
+
+      } else {
+        $messageColor = 'red';
+        $messageHead = 'Action aborted';
+        $messageMain = 'Sorry, we could not delete this course.<br /><br /> Please make sure the course exist, and that you are permitted to do this action. ';
+
+      }}
+      else {
+        $messageColor = 'red';
+        $messageHead = 'Confirm Action';
+        $messageMain = 'Are you sure that you want to delete this course? <br /><br />This action cannot be canceld!';
+        $messageOK = "Yes";
+        $cancelURL = 'school.php';
+        $messageURL = 'school.php?delcrs='.$_GET['delcrs'].'&aprooved';
+      }
+
+      include __DIR__.'/messaging.php';
+    }
 
 
  ?>

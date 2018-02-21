@@ -70,6 +70,21 @@
 
         }
 
+        public static function deleteStudent($studentId) {
+          $sql =
+            'DELETE FROM `students-courses` WHERE `student-id` = '.$studentId;
+            DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+
+          $sql = 'DELETE FROM `students` WHERE `id` = '.$studentId;
+          return DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+        }
+
+        public static function deleteCourse($courseId) {
+          $sql = 'DELETE FROM `courses` WHERE `id` = '.$courseId;
+          return DAL::getInstance($GLOBALS['dbDetails'])->insertData($sql);
+        }
+
+
         public static function createStudent ($student) {
           $sql =
             'INSERT INTO
