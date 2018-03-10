@@ -1,5 +1,6 @@
-<?php include_once 'header.php';
+<?php
   include_once '../controllers/login-control.php';
+  include_once 'header.php';
 ?>
 
 

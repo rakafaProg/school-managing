@@ -1,11 +1,11 @@
 
 
     <!-- This template recives an array named $params:
-
+      For example:
     [
         'image-url' => 'url',
-        'name' => 'url',
-        'meta' => 'url',
+        'name' => 'name',
+        'meta' => 'meta',
         'description' => ['1' , '2'],
         'buttons' => [
             [

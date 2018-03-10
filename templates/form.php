@@ -1,59 +1,4 @@
-
-
-<?php
-
- // $params = [
- //    'id' => '1',
- //    'header' => 'header',
- //    'inputs' => [
- //        [
- //          'type' => 'text',
- //          'placeholder' => 'Name',
- //          'name' => 'name',
- //          'value' => '',
- //          'icon' => 'user'
- //        ],
- //        [
- //          'type' => 'password',
- //          'placeholder' => 'Password',
- //          'name' => 'password',
- //          'value' => '',
- //          'icon' => 'user'
- //        ],
- //        [
- //          'type' => 'text',
- //          'placeholder' => 'Phone Number',
- //          'name' => 'phone',
- //          'value' => '',
- //          'icon' => 'user'
- //        ],
- //        [
- //          'type' => 'email',
- //          'placeholder' => 'Email Adress',
- //          'name' => 'email',
- //          'value' => '',
- //          'icon' => 'user'
- //        ]
- //    ],
- //    'dropdwon' => [
- //      'name' => 'name',
- //      'placeholder' => 'Select Role',
- //      'icon' => 'privacy',
- //      'options' => [
- //        ['value'=>1, 'extra' => 'disabled', 'text'=>'Owner'],
- //        ['value'=>2, 'extra' => '', 'text'=>'Manager'],
- //        ['value'=>3, 'extra' => '', 'text'=>'Sales'],
- //      ]
- //    ],
- //    'imageUrl' => '../images-uploading/users-profile/default.png',
- //    'imageName' => 'default.png'
- //
- // ];
-
-
-?>
-
-
+<!-- This template recive params, and create form for these params. -->
 
 
 
@@ -68,8 +13,10 @@
 
 <form class="ui large form" action="" method="POST" enctype="multipart/form-data">
 
+  <!-- Id - for any form -->
   <input name="id" class="invisible" type="text" id='form-id' value="<?= $params['id'] ?>" />
 
+  <!-- A list of inputs for the form -->
   <?php foreach ($params['inputs'] as $input) { ?>
 
     <div class="ui left icon fluid input">
@@ -80,6 +27,7 @@
   <?php }
 
 
+    // If there is a text area in the form:
     if (isset($params['textarea'])) {
       echo '
       <div class"ui label">'.$params['textarea']['placeholder'].':</div>
@@ -88,6 +36,7 @@
       </div>';
     }
 
+    // If there is a dropdown input in the form
       if (isset($params['dropdwon'])) {
         echo '<div class="ui left icon fluid input">';
         echo '<select class="ui dropdown" name="'.$params['dropdwon']['name'].'">';
@@ -105,7 +54,7 @@
 
 
 
-
+      <!-- Loadin an image -->
        <div class="ui two column stackable grid">
         <div class="six wide column">
           <label for="file" class="ui icon  inverted green button">
@@ -120,6 +69,7 @@
         </div>
       </div>
 
+      <!-- Any other data -->
       <div>
         <?php if(isset($params['aditional']))
                   echo $params['aditional'];
@@ -127,6 +77,7 @@
       </div>
 
 
+      <!-- Submit button/s -->
        <div class="ui two buttons">
 
            <input type="submit" name="submit" class="ui inverted green button" value="Save">

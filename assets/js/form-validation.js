@@ -1,5 +1,5 @@
 
-
+// Validate Log-in Form
 
 document.querySelector('.login-form .submit').addEventListener ('click', function(e){
   //e.preventDefault();

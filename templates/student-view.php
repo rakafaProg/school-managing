@@ -1,8 +1,5 @@
-<?php
 
-//$student = new Student(['name' => 'Black Star', 'id' => 6 , 'email'=>'black@gmail.com', 'image' => 'default.png', 'phone' => '42-42-564']);
-
-?>
+<!-- This template recive a student, and makes view for it -->
 
   <div class="ui green header">
     Student Details
@@ -42,7 +39,7 @@
  <div class="ui tall stacked segment" style="min-height:0; max-height: 500px;">
    <div class="ui green header">
    <?php  if ($student->getCourseAmount() > 0) echo "Courses:"; else  echo "The student is not listed to any course yet."; ?>
-   
+
    </div>
    <div class="ui divider"></div>
 

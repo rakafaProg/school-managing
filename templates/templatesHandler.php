@@ -1,5 +1,7 @@
 <?php
 
+// Here we handle the templates for each object type in the system
+
   class Card {
     private $templateURL;
 
@@ -240,16 +242,7 @@
           'value' => ''
         ],
         'imageUrl' => '../images-uploading/courses/default.png',
-        'imageName' => 'default.png',
-        //'deletable' => true,
-        // 'aditional' => $this->buildCourses([
-        //   ['id'=>1, 'name'=>'Ninja'],
-        //   ['id'=>2, 'name'=>'English'],
-        //   ['id'=>3, 'name'=>'Math'],
-        //   ['id'=>4, 'name'=>'Java'],
-        //   ['id'=>1, 'name'=>'Ninja'],
-        //
-        // ])
+        'imageName' => 'default.png'
       ];
 
 
@@ -312,7 +305,6 @@
       }
       $aditional .= '</div>';
 
-      //debug($coursesList);
 
       return $aditional;
 

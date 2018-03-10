@@ -1,4 +1,4 @@
-<?php session_start();
+<?php include_once 'session.php'; // Start session only once.
 
   include_once '../debug.php';
   include_once "../data/admin_bll.php";

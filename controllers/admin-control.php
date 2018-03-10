@@ -136,10 +136,12 @@
 
 
     // ---------- DELETE ADMIN ----------
-    if (!empty($_GET['delete']) ) {
+    if (!empty($_GET['delete'])
+        && !empty($adminsList[$_GET['delete']])
+        && $user->getRole() <= $adminsList[$_GET['delete']]->getRole()) {
       $messageURL = 'admin.php';
 
-      if (isset($_GET['aprooved'])) {
+      if (isset($_GET['aprooved']) ) {
         $res = AdminBLL::deleteAdminById($_GET['delete']);
         if($res['rowsEffected'] == 1){
           $messageColor = 'green';
@@ -147,12 +149,14 @@
           $messageMain = 'The user was successfuly deleted. ';
 
       } else {
+        // Delete Failed
         $messageColor = 'red';
         $messageHead = 'Action aborted';
         $messageMain = 'Sorry, we could not delete this user.<br /><br /> Please make sure the user exist, and that you are permitted to do this action. ';
 
       }}
       else {
+        // Confirm Deleting
         $messageColor = 'red';
         $messageHead = 'Confirm Action';
         $messageMain = 'Are you sure that you want to delete this user? <br /><br />This action cannot be canceld!';
@@ -160,7 +164,7 @@
         $cancelURL = 'admin.php';
         $messageURL = 'admin.php?delete='.$_GET['delete'].'&aprooved';
       }
-
+      // Send Message to User
       include __DIR__.'/messaging.php';
     }
 

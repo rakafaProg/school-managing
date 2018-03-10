@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2018 at 07:25 PM
+-- Generation Time: Mar 10, 2018 at 02:12 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -43,10 +43,9 @@ CREATE TABLE `administrators` (
 --
 
 INSERT INTO `administrators` (`id`, `name`, `role`, `phone`, `email`, `password`, `image`) VALUES
-(1, 'Shinigami Sama', 1, '42-42-564', 'shinigami@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '1.png'),
+(1, 'Shinigami Sama', 1, '42-42-564', 'admin@admin', 'e19d5cd5af0378da05f63f891c7467af', '1.png'),
 (2, 'Franken Stein Hakase', 2, '72-727-272', 'stein@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '2.png'),
 (3, 'Mary Sensei', 2, '13-13-13-13', 'mary@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '3.png'),
-(4, 'Spirit Albarn (Death Scyt', 3, '00-0000-0000', 'spirito@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '4.jpg'),
 (5, 'Shido Sensei', 3, '123-456-789', 'shido@shibusen.com', 'e19d5cd5af0378da05f63f891c7467af', '5.png');
 
 -- --------------------------------------------------------
@@ -124,6 +123,16 @@ CREATE TABLE `students-courses` (
   `course-id` int(11) NOT NULL,
   `student-id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `students-courses`
+--
+
+INSERT INTO `students-courses` (`course-id`, `student-id`) VALUES
+(1, 2),
+(1, 3),
+(2, 1),
+(2, 3);
 
 --
 -- Indexes for dumped tables

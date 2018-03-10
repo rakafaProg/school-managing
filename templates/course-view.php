@@ -1,8 +1,4 @@
-<?php
-
-//$student = new Student(['name' => 'Black Star', 'id' => 6 , 'email'=>'black@gmail.com', 'image' => 'default.png', 'phone' => '42-42-564']);
-
-?>
+<!-- This template recive a course, and makes view for it -->
 
   <div class="ui green header">
     Course Details

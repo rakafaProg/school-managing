@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css" />
+    <title>API DOC</title>
+  </head>
+  <body>
+
+    <h1>Api Doc</h1>
+    <table class="ui collapsing celled striped  table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Method + End Point</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>View all courses and students details</td>
+          <td>GET <br />school.php</td>
+        </tr>
+        <tr>
+          <td>View course details</td>
+          <td>GET <br />school.php?viewcourse={id}</td>
+        </tr>
+        <tr>
+          <td>Create new course</td>
+          <td>POST <br />school.php?course=-1</td>
+        </tr>
+        <tr>
+          <td>Update existing course</td>
+          <td>POST <br />school.php?course={id}</td>
+        </tr>
+        <tr>
+          <td>Delete a course</td>
+          <td>GET <br />school.php?delcrs={id}</td>
+        </tr>
+        <tr>
+          <td>View student details</td>
+          <td>GET <br />school.php?viewstudent={id}</td>
+        </tr>
+        <tr>
+          <td>Create new student</td>
+          <td>POST <br />school.php?student=-1</td>
+        </tr>
+        <tr>
+          <td>Update existing student</td>
+          <td>POST <br />school.php?student={id}</td>
+        </tr>
+        <tr>
+          <td>Delete a student</td>
+          <td>GET <br />school.php?delstd={id}</td>
+        </tr>
+        <tr>
+          <td>View all admins details</td>
+          <td>GET <br />admin.php</td>
+        </tr>
+        <tr>
+          <td>Create new admin</td>
+          <td>POST <br />admin.php?edit=-1</td>
+        </tr>
+        <tr>
+          <td>Update existing admin</td>
+          <td>POST <br />admin.php?edit={id}</td>
+        </tr>
+        <tr>
+          <td>Delete a admin</td>
+          <td>GET <br />admin.php?delete={id}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </body>
+
+  <style>
+    body {
+      margin: 20px;
+    }
+  </style>
+</html>
